@@ -1,0 +1,184 @@
+PRODUCTIONS
+program                        = [['~functions', '~main'], ['~main']]
+functions                      = [['~functions', '~function'], ['~function']]
+function                       = [['~function_header', '#', '~function_body']]
+function_header                = [['~data_type', '.name', '(', '~parameter_list', ')']]
+parameter_list                 = [['~parameter_list', ',', '~data_type', '.name'], ['~data_type', '.name']]
+data_type                      = [['int'], ['float'], ['boolean'], ['char'], ['string']]
+boolean                        = [['true'], ['false']]
+digit                          = [['0'], ['1'], ['2'], ['3'], ['4'], ['5'], ['6'], ['7'], ['8'], ['9']]
+non_zero_digit                 = [['1'], ['2'], ['3'], ['4'], ['5'], ['6'], ['7'], ['8'], ['9']]
+char                           = [["'", '~letter', "'"], ["'", '~digit', "'"], ["'", '_', "'"]]
+letter                         = [['a'], ['b'], ['c'], ['d'], ['e'], ['f'], ['g'], ['h'], ['i'], ['j'], ['k'], ['l'], ['m'], ['n'], ['o'], ['p'], ['q'], ['r'], ['s'], ['t'], ['u'], ['v'], ['w'], ['x'], ['y'], ['z'], ['A'], ['B'], ['C'], ['D'], ['E'], ['F'], ['G'], ['H'], ['I'], ['J'], ['K'], ['L'], ['M'], ['N'], ['O'], ['P'], ['Q'], ['R'], ['S'], ['T'], ['U'], ['V'], ['W'], ['X'], ['Y'], ['Z']]
+int                            = [['+', '~non_zero_digit'], ['-', '~non_zero_digit'], ['0'], ['+', '~non_zero_digit', '~digits'], ['-', '~non_zero_digit', '~digits']]
+digits                         = [['~digit'], ['~digit', '~digits']]
+float                          = [['~int', '.', '~digits']]
+function_body                  = [['~statements', '^', '~return_type', ';', '#']]
+statements                     = [['^', '~statement', ';', '#'], ['^', '~statement', ';', '#', '~statements']]
+return_type                    = [['return', '~expression']]
+statement                      = [['~assignment_statement'], ['~declaration_statement'], ['~conditional'], ['~iterative'], ['~function_call'], ['~output_statement'], ['~newline']]
+assignment_statement           = [['~data_type', '.name', '=', '~expression'], ['.name', '=', '~expression']]
+declaration_statement          = [['~data_type', '.name']]
+expression                     = [['~arithmetic_expression'], ['~relational_expression'], ['~logical_expression'], ['~function_call']]
+arithmetic_expression          = [['~term', '*', '~term'], ['~term', '/', '~term'], ['~term']]
+term                           = [['~factor'], ['~factor', '+', '~factor'], ['~factor', '-', '~factor']]
+factor                         = [['.name'], ['.int'], ['.float']]
+relational_expression          = [['~arithmetic_expression', '==', '~arithmetic_expression'], ['~arithmetic_expression', '>', '~arithmetic_expression'], ['~arithmetic_expression', '<', '~arithmetic_expression'], ['~arithmetic_expression', '<=', '~arithmetic_expression'], ['~arithmetic_expression', '>=', '~arithmetic_expression'], ['~arithmetic_expression', '!=', '~arithmetic_expression']]
+logical_expression             = [['~relational_expression', '~relational_expressions']]
+relational_expressions         = [['&', '&', '~relational_expression'], ['`', '~relational_expression'], ['&&', '~relational_expression', '~relational_expressions'], ['`', '~relational_expression', '~relational_expressions']]
+main                           = [['main()', '#', '~statements']]
+ops                            = [['+'], ['*'], ['-'], ['/']]
+conditional                    = [['if', '~logical_expression', '#', '~statements'], ['if', '~logical_expression', '#', '~statements', 'else', '#', '~statements']]
+iterative                      = [['for', '(', '~assignment_statement', ';', '~logical_expression', ';', '~ops', '~digits', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', '~logical_expression', ';', '~ops', '~digits', ')', '#'], ['for', '(', ';', '~logical_expression', ';', '~ops', '~digits', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', ';', '~ops', '~digits', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', '~logical_expression', ';', ')', '#', '~statements'], ['for', '(', ';', ';', '~ops', '~digits', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', ';', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', '~logical_expression', ';', ')', '#'], ['for', '(', ';', '~logical_expression', ';', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', ';', '~ops', '~digits', ')', '#'], ['for', '(', ';', '~logical_expression', ';', '~ops', '~digits', ')', '#'], ['for', '(', ';', ';', ')', '#', '~statements'], ['for', '(', '~assignment_statement', ';', ';', ')', '#'], ['for', '(', ';', '~logical_expression', ';', ')', '#'], ['for', '(', ';', ';', '~ops', '~digits', ')', '#'], ['for', '(', '~assignment_statement', ';', '~logical_expression', ';', ')', '#', '~statements'], ['for', '(', ';', ';', ')', '#']]
+valid_string_elements          = [['~letter'], ['~digit']]
+string                         = [['"', '"'], ['"', '~valid_string_elementsS', '"']]
+valid_string_elementsS         = [['~valid_string_elements'], ['~valid_string_elements', '~valid_string_elementsS']]
+function_call                  = [['.name', '(', ')'], ['.name', '(', '~expressions', ')']]
+expressions                    = [['~expression'], ['~expression', '~expressions']]
+output_statement               = [['output', '~string'], ['~expression']]
+newline                        = [['newline()']]
+
+NON TERMINALS 38
+~arithmetic_expression
+~assignment_statement
+~boolean
+~char
+~conditional
+~data_type
+~declaration_statement
+~digit
+~digits
+~expression
+~expressions
+~factor
+~float
+~function
+~function_body
+~function_call
+~function_header
+~functions
+~int
+~iterative
+~letter
+~logical_expression
+~main
+~newline
+~non_zero_digit
+~ops
+~output_statement
+~parameter_list
+~program
+~relational_expression
+~relational_expressions
+~return_type
+~statement
+~statements
+~string
+~term
+~valid_string_elements
+~valid_string_elementsS
+
+TERMINALS 103
+!=
+"
+#
+&
+&&
+'
+(
+)
+*
++
+,
+-
+.
+.float
+.int
+.name
+/
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+;
+<
+<=
+=
+==
+>
+>=
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z
+^
+_
+`
+a
+b
+boolean
+c
+char
+d
+e
+else
+f
+false
+float
+for
+g
+h
+i
+if
+int
+j
+k
+l
+m
+main()
+n
+newline()
+o
+output
+p
+q
+r
+return
+s
+string
+t
+true
+u
+v
+w
+x
+y
+z
