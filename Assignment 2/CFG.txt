@@ -13,7 +13,7 @@
 {expression}@[LITERAL] {arithmetic_expression} | {relational_expression} | {logical_expression} | {function_call}
 {arithmetic_expression}@{term}  [HIGH_ARITH]  {term}
 {term}@{factor}|{factor}  [LOW_ARITH]  {factor}
-{factor}@[IDENTIFIER] | [NUMER]
+{factor}@[IDENTIFIER] | [NUMBER]
 {relational_expression}@{arithmetic_expression}  [REL_OP]  {arithmetic_expression}
 {logical_expression}@{relational_expression}  {relational_expressions}
 {relational_expressions}@[LOGICAL_OP] {relational_expression}  | [LOGICAL_OP]  {relational_expression} {relational_expressions}

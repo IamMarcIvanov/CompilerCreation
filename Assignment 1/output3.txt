@@ -1,0 +1,34 @@
+************Token*************************Lexeme*********************Line Number**********
+          DATA_TYPE                      boolean                          1               
+         LEXER ERROR                        @                             1               
+           NEWLINE                       newline                          1               
+             TAB                          (tab)                           2               
+          DATA_TYPE                       string                          2               
+          IDENTIFIER                        s                             2               
+             ASMT                           =                             2               
+         LEXER ERROR                        "                             2               
+           NEWLINE                       newline                          2               
+             TAB                          (tab)                           3               
+          DATA_TYPE                       string                          3               
+          IDENTIFIER                        y                             3               
+             ASMT                           =                             3               
+           LITERAL                   "something else"                     3               
+           NEWLINE                       newline                          3               
+             TAB                          (tab)                           4               
+            RETURN                        return                          4               
+          IDENTIFIER                      params                          4               
+          LOW_ARITH                         +                             4               
+            NUMBER                          2                             4               
+          HIGH_ARITH                        *                             4               
+          IDENTIFIER                        y                             4               
+          SEMI_COLON                        ;                             4               
+           NEWLINE                       newline                          4               
+             MAIN                         main()                          5               
+           NEWLINE                       newline                          5               
+             TAB                          (tab)                           6               
+          DATA_TYPE                       float                           6               
+          IDENTIFIER                        x                             6               
+             ASMT                           =                             6               
+            NUMBER                         1.2                            6               
+         LEXER ERROR                        .                             6               
+           NEWLINE                       newline                          6               

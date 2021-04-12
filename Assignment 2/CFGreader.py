@@ -1,5 +1,5 @@
-read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\CFG.txt'
-write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\prod.txt'
+read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG.txt'
+write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\prod.txt'
 
 
 class CFG:

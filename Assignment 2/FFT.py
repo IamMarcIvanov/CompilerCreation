@@ -1,11 +1,11 @@
 from CFGreader import *
 import copy
 
-read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\CFG.txt'
-write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\prod.txt'
-write_first = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\first.txt'
-write_follow = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\follow.txt'
-write_table = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\table.txt'
+read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG.txt'
+write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\prod.txt'
+write_first = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\first.txt'
+write_follow = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\follow.txt'
+write_table = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\table.txt'
 
 class FFT:
     def __init__(self, writeFiles=True,
@@ -21,13 +21,13 @@ class FFT:
         self.initialise()
         
         self.setFirstSet()
-        self.writeFirst(first)
         self.setFollowSet()
-        self.writeFollow(follow)
         self.setParseTable()
         
         
         if writeFiles:
+            self.writeFirst(first)
+            self.writeFollow(follow)
             self.writeTable(table)
         
     def initialise(self):
@@ -99,12 +99,12 @@ class FFT:
                         row_n = row + 1
                         col_n = sorted(self.cfg.T).index(t) + 1
                         if not self.table[row_n][col_n]:
-                            self.table[row_n][col_n] = nt.upper() + ' = ' + ' '.join(rhs)
+                            self.table[row_n][col_n] = nt + ' = ' + ' '.join(rhs)
                 else:
                     row_n = row + 1
                     col_n = sorted(self.cfg.T).index(rhs[0]) + 1
                     if not self.table[row_n][col_n]:
-                        self.table[row_n][col_n] = nt.upper() + ' = ' + ' '.join(rhs)
+                        self.table[row_n][col_n] = nt + ' = ' + ' '.join(rhs)
                     
         for row_n, row in enumerate(self.table):
             for col_n, col in enumerate(row):

@@ -5,7 +5,7 @@ conditional                    = [['IF', 'logical_expression', 'NEWLINE', 'state
 declaration_statement          = [['DATA_TYPE', 'IDENTIFIER']]
 expression                     = [['LITERAL', 'arithmetic_expression'], ['relational_expression'], ['logical_expression'], ['function_call']]
 expressions                    = [['expression'], ['expression', 'COMMA', 'expressions']]
-factor                         = [['IDENTIFIER'], ['NUMER']]
+factor                         = [['IDENTIFIER'], ['NUMBER']]
 function                       = [['function_header', 'NEWLINE', 'function_body']]
 function_body                  = [['statements', 'TAB', 'return_type', 'SEMI_COLON', 'NEWLINE']]
 function_call                  = [['IDENTIFIER', 'OPEN_BRACKET', 'CLOSE_BRACKET'], ['IDENTIFIER', 'OPEN_BRACKET', 'expressions', 'CLOSE_BRACKET']]
@@ -50,7 +50,7 @@ statement
 statements
 term
 
-TERMINALS 23
+TERMINALS 22
 ASMT
 CLOSE_BRACKET
 COMMA
@@ -66,7 +66,6 @@ LOW_ARITH
 MAIN
 NEWLINE
 NUMBER
-NUMER
 OP
 OPEN_BRACKET
 OP_NEWLINE
