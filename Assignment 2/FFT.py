@@ -9,26 +9,25 @@ write_table = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\table.txt'
 
 class FFT:
     def __init__(self, writeFiles=True,
-                       check_max=False,
                        read_cfg_loc=read_cfg,
                        rules=write_productions, 
                        first=write_first, 
                        follow=write_follow, 
                        table=write_table):
-        self.cfg = CFG(False, read_cfg, write_productions)
+        self.cfg = CFG(True, read_cfg, write_productions)
         self.FIRST = {}
         self.FOLLOW = {}
         self.table = [[]]
         self.initialise()
         
         self.setFirstSet()
+        self.writeFirst(first)
         self.setFollowSet()
+        self.writeFollow(follow)
         self.setParseTable()
         
         
         if writeFiles:
-            self.writeFirst(first)
-            self.writeFollow(follow)
             self.writeTable(table)
         
     def initialise(self):
@@ -43,7 +42,7 @@ class FFT:
         self.table[0].append('$')
         
         for nt in sorted(self.cfg.NT):
-            self.table.append([nt.upper()] + [''] * (len(self.cfg.T) + 1))
+            self.table.append([nt] + [''] * (len(self.cfg.T) + 1))
     
     def compare(self, d1, d2):
         keys1 = sorted(d1.keys())
@@ -63,10 +62,10 @@ class FFT:
             fi  = copy.deepcopy(self.FIRST)
             for nt in self.cfg.productions.keys():
                 for rhs in self.cfg.productions[nt]:
-                    if rhs[0][0].islower():
+                    if rhs[0][0].isupper():
                         self.FIRST[nt].add(rhs[0])
                     else:
-                        if self.FIRST[rhs[0]]:
+                        if rhs[0] in self.FIRST.keys():
                             self.FIRST[nt].update(self.FIRST[rhs[0]])
                         else:
                             continue
@@ -131,22 +130,13 @@ class FFT:
                 f.write('{:<30} = {}\n'.format(key, sorted(self.FOLLOW[key])))
 
     def writeTable(self, write_table_loc):
-        max_len = 0
-        s = ''
         with open(write_table_loc, 'w') as f:
             for row_n, row in enumerate(self.table):
                 for col_n, cell in enumerate(row):
-                        f.write('{:^50} | '.format(cell))
-                        if check_max:
-                            if len(cell) > max_len:
-                                max_len = len(cell)
-                                s = cell
+                        f.write('{:^140} | '.format(cell))
                 if row_n == 0:
-                        f.write('\n' + '-' * (53 * (len(row))) + '\n')
+                        f.write('\n' + '-' * (143 * (len(row))) + '\n')
                 else:
                         f.write('\n')
-        if check_max:
-            print(max_len)
-            print(s)
 
 obj = FFT(True)
