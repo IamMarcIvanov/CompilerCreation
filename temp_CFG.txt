@@ -1,0 +1,25 @@
+24
+{program}@{functions}{main} | {main}
+{functions}@{function}{functions} | {function}
+{function}@{function_header}[NEWLINE]{function_body}
+{function_header}@[DATA_TYPE] [IDENTIFIER] [OPEN_BRACKET]{parameter_list}[CLOSE_BRACKET]
+{parameter_list}@[DATA_TYPE] [IDENTIFIER] [COMMA] {parameter_list} | [DATA_TYPE]  [IDENTIFIER]
+{function_body}@{statements}[TAB]{return_type} [SEMI_COLON] [NEWLINE]
+{statements}@[TAB]{statement} [SEMI_COLON] [NEWLINE] | [TAB]{statement} [SEMI_COLON] {statements}
+{return_type}@[RETURN]  {expression}
+{statement}@{assignment_statement} | {declaration_statement} | {conditional} | {iterative} | {function_call} | [OP] {expression} | [OP_NEWLINE]
+{assignment_statement}@[DATA_TYPE] [IDENTIFIER]  [ASMT]  {expression} | [IDENTIFIER]  [ASMT]  {expression}
+{declaration_statement}@[DATA_TYPE]  [IDENTIFIER]
+{expression}@[LITERAL] {arithmetic_expression} | {relational_expression} | {logical_expression} | {function_call}
+{arithmetic_expression}@{term}  [HIGH_ARITH]  {term}
+{term}@{factor}|{factor}  [LOW_ARITH]  {factor}
+{factor}@[IDENTIFIER] | [NUMER]
+{relational_expression}@{arithmetic_expression}  [REL_OP]  {arithmetic_expression}
+{logical_expression}@{relational_expression}  {relational_expression}
+{relational_expressions}@[LOGICAL_OP] {relational_expression}  | [LOGICAL_OP]  {relational_expression} {relational_expressions}
+{main}@[MAIN] [NEWLINE]{statements}
+{ops}@[HIGH_ARITH] | [LOW_ARITH]
+{conditional}@[IF]  {logical_expression} [NEWLINE] {statements} | [IF]  {logical_expression} [NEWLINE] {statements} [ELSE] [NEWLINE] {statements}
+{iterative}@[FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE]  | [FOR] [OPEN_BRACKET]   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]     [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]   [SEMI_COLON]     [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]      [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE]   | [FOR] [OPEN_BRACKET]   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]      [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE] | [FOR] [OPEN_BRACKET]   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE]  | [FOR] [OPEN_BRACKET]  [SEMI_COLON]   [SEMI_COLON]  [CLOSE_BRACKET] [NEWLINE]  {statements} | [FOR] [OPEN_BRACKET]{assignment_statement}   [SEMI_COLON]      [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE]   | [FOR] [OPEN_BRACKET]   [SEMI_COLON]   {logical_expression}   [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE]   | [FOR] [OPEN_BRACKET]   [SEMI_COLON]      [SEMI_COLON]   {ops}[NUMBER][CLOSE_BRACKET] [NEWLINE] | [FOR] [OPEN_BRACKET]  [SEMI_COLON]      [SEMI_COLON]   [CLOSE_BRACKET] [NEWLINE] 
+{function_call}@[IDENTIFIER] [OPEN_BRACKET] [CLOSE_BRACKET]  | [IDENTIFIER] [OPEN_BRACKET]{expressions}[CLOSE_BRACKET]
+{expressions}@{expression} | {expression}[COMMA] {expressions}

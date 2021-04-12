@@ -1,4 +1,4 @@
-41
+42
 {program}@{functions}{main} | {main}
 {functions}@{function}{functions} | {function}
 {function}@{fn_hdr}#{function_body}
@@ -26,7 +26,8 @@
 {arth_ex}@{term}  *  {term} | {term}  /  {term} | {term}
 {term}@{factor}|{factor}  +  {factor} | {factor}  -  {factor}
 {factor}@{name} | {int} | {float}
-{rel_ex}@{arth_ex}  [==]  {arth_ex} | {arth_ex}  >  {arth_ex} | {arth_ex}  <  {arth_ex} | {arth_ex}  [<=]  {arth_ex} | {arth_ex}  [>=]  {arth_ex} | {arth_ex}  [!=]  {arth_ex}
+{rel_op}@ [==] | [!=] | [<=] | < | > | [>=]
+{rel_ex}@{arth_ex} {rel_op} {arth_ex}
 {log_ex}@{rel_ex}  {rel_exs}
 {rel_exs}@[&&] {rel_ex} | [`]  {rel_ex} | [&&]  {rel_ex} {rel_exs} | [`]  {rel_ex} {rel_exs}
 {main}@[main()]#{sts}

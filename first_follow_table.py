@@ -38,7 +38,7 @@ FOLLOW[start_nt].add('$')
     #FIRST[t] = set([t])
     # FOLLOW[t] = set()
 
-
+# FIRST
 while(True):
     fi  = copy.deepcopy(FIRST)
     for nt in r.productions.keys():
@@ -54,7 +54,7 @@ while(True):
         break
 
 
-
+# FOLLOW
 while(True):
     fo = copy.deepcopy(FOLLOW)
     for Ai in r.NT:
@@ -72,6 +72,7 @@ while(True):
     if compare(fo, FOLLOW):
         break
 
+# PRSE TABLE
 table = [[]]
 table[0].append('')
 for t in sorted(r.T):
@@ -97,7 +98,17 @@ for row, nt in enumerate(sorted(r.NT)):
                 rule = [x.upper() if x.startswith('~') else x.lower() for x in rhs]
                 table[row_n][col_n] = nt.upper() + ' = ' + ' '.join(rule)
             
-        
+for row_n, row in enumerate(table):
+    for col_n, col in enumerate(row):
+        if row_n == 0 or col_n == 0:
+            continue
+        else:
+            if table[row_n][col_n] == '':
+                if table[0][col_n] in FOLLOW['~' + table[row_n][0].lower()]:
+                    table[row_n][col_n] = 'sync'
+                else:
+                    table[row_n][col_n] = 'skip'
+            
             
 write_first = r'E:\BITS\Yr 3 Sem 2\CS F363 Compiler Construction\Assignments\Assignment 2\first.txt'
 write_follow = r'E:\BITS\Yr 3 Sem 2\CS F363 Compiler Construction\Assignments\Assignment 2\follow.txt'

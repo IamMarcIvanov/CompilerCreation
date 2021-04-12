@@ -1,186 +1,76 @@
-PRODUCTIONS41 
-~arth_ex                       = [['~term', '*', '~term'], ['~term', '/', '~term'], ['~term']]
-~ass_st                        = [['~data_type', '~name', '=', '~expression'], ['~name', '=', '~expression']]
-~boolean                       = [['true'], ['false']]
-~char                          = [["'", '~ldu', "'"]]
-~conditional                   = [['if', '~log_ex', '#', '~sts'], ['if', '~log_ex', '#', '~sts', 'else', '#', '~sts']]
-~data_type                     = [['int'], ['float'], ['boolean'], ['char'], ['string']]
-~decl_st                       = [['~data_type', '~name']]
-~digit                         = [['0'], ['1'], ['2'], ['3'], ['4'], ['5'], ['6'], ['7'], ['8'], ['9']]
-~digits                        = [['~digit'], ['~digit', '~digits']]
-~expression                    = [['~string'], ['~char'], ['~boolean'], ['~arth_ex'], ['~rel_ex'], ['~log_ex'], ['~function_call']]
-~expressions                   = [['~expression'], ['~expression', ',', '~expressions']]
-~factor                        = [['~name'], ['~int'], ['~float']]
-~float                         = [['~int', '.', '~digits']]
-~fn_hdr                        = [['~data_type', '~name', '(', '~param_list', ')']]
-~function                      = [['~fn_hdr', '#', '~function_body']]
-~function_body                 = [['~sts', '^', '~return_type', ';', '#']]
-~function_call                 = [['~name', '(', ')'], ['~name', '(', '~expressions', ')']]
-~functions                     = [['~function', '~functions'], ['~function']]
-~int                           = [['+', '~non_zero_digit'], ['-', '~non_zero_digit'], ['0'], ['+', '~non_zero_digit', '~digits'], ['-', '~non_zero_digit', '~digits']]
-~iter                          = [['for', '(', '~ass_st', ';', '~log_ex', ';', '~ops', '~digits', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', '~log_ex', ';', '~ops', '~digits', ')', '#'], ['for', '(', ';', '~log_ex', ';', '~ops', '~digits', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', ';', '~ops', '~digits', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', '~log_ex', ';', ')', '#', '~sts'], ['for', '(', ';', ';', '~ops', '~digits', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', ';', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', '~log_ex', ';', ')', '#'], ['for', '(', ';', '~log_ex', ';', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', ';', '~ops', '~digits', ')', '#'], ['for', '(', ';', '~log_ex', ';', '~ops', '~digits', ')', '#'], ['for', '(', ';', ';', ')', '#', '~sts'], ['for', '(', '~ass_st', ';', ';', ')', '#'], ['for', '(', ';', '~log_ex', ';', ')', '#'], ['for', '(', ';', ';', '~ops', '~digits', ')', '#'], ['for', '(', '~ass_st', ';', '~log_ex', ';', ')', '#', '~sts'], ['for', '(', ';', ';', ')', '#']]
-~ldu                           = [['~letter'], ['~digit'], ['_']]
-~ldus                          = [['~ldu', '~ldus'], ['~ldu']]
-~letter                        = [['a'], ['b'], ['c'], ['d'], ['e'], ['f'], ['g'], ['h'], ['i'], ['j'], ['k'], ['l'], ['m'], ['n'], ['o'], ['p'], ['q'], ['r'], ['s'], ['t'], ['u'], ['v'], ['w'], ['x'], ['y'], ['z'], ['A'], ['B'], ['C'], ['D'], ['E'], ['F'], ['G'], ['H'], ['I'], ['J'], ['K'], ['L'], ['M'], ['N'], ['O'], ['P'], ['Q'], ['R'], ['S'], ['T'], ['U'], ['V'], ['W'], ['X'], ['Y'], ['Z']]
-~log_ex                        = [['~rel_ex', '~rel_exs']]
-~main                          = [['main()', '#', '~sts']]
-~name                          = [['~letter'], ['~letter', '~ldus']]
-~newline                       = [['newline()']]
-~non_zero_digit                = [['1'], ['2'], ['3'], ['4'], ['5'], ['6'], ['7'], ['8'], ['9']]
-~op_st                         = [['output', '~expression']]
-~ops                           = [['+'], ['*'], ['-'], ['/']]
-~param_list                    = [['~data_type', '~name', ',', '~param_list'], ['~data_type', '~name']]
-~program                       = [['~functions', '~main'], ['~main']]
-~rel_ex                        = [['~arth_ex', '==', '~arth_ex'], ['~arth_ex', '>', '~arth_ex'], ['~arth_ex', '<', '~arth_ex'], ['~arth_ex', '<=', '~arth_ex'], ['~arth_ex', '>=', '~arth_ex'], ['~arth_ex', '!=', '~arth_ex']]
-~rel_exs                       = [['&&', '~rel_ex'], ['`', '~rel_ex'], ['&&', '~rel_ex', '~rel_exs'], ['`', '~rel_ex', '~rel_exs']]
-~return_type                   = [['return', '~expression']]
-~st                            = [['~ass_st'], ['~decl_st'], ['~conditional'], ['~iter'], ['~function_call'], ['~op_st'], ['~newline']]
-~string                        = [['"', '"'], ['"', '~val_in_str', '"']]
-~sts                           = [['^', '~st', ';', '#'], ['^', '~st', ';', '#', '~sts']]
-~term                          = [['~factor'], ['~factor', '+', '~factor'], ['~factor', '-', '~factor']]
-~val_in_str                    = [['~val_str'], ['~val_str', '~val_in_str']]
-~val_str                       = [['~letter'], ['~digit']]
+PRODUCTIONS 24
+arithmetic_expression          = [['term', 'HIGH_ARITH', 'term']]
+assignment_statement           = [['DATA_TYPE', 'IDENTIFIER', 'ASMT', 'expression'], ['IDENTIFIER', 'ASMT', 'expression']]
+conditional                    = [['IF', 'logical_expression', 'NEWLINE', 'statements'], ['IF', 'logical_expression', 'NEWLINE', 'statements', 'ELSE', 'NEWLINE', 'statements']]
+declaration_statement          = [['DATA_TYPE', 'IDENTIFIER']]
+expression                     = [['LITERAL', 'arithmetic_expression'], ['relational_expression'], ['logical_expression'], ['function_call']]
+expressions                    = [['expression'], ['expression', 'COMMA', 'expressions']]
+factor                         = [['IDENTIFIER'], ['NUMER']]
+function                       = [['function_header', 'NEWLINE', 'function_body']]
+function_body                  = [['statements', 'TAB', 'return_type', 'SEMI_COLON', 'NEWLINE']]
+function_call                  = [['IDENTIFIER', 'OPEN_BRACKET', 'CLOSE_BRACKET'], ['IDENTIFIER', 'OPEN_BRACKET', 'expressions', 'CLOSE_BRACKET']]
+function_header                = [['DATA_TYPE', 'IDENTIFIER', 'OPEN_BRACKET', 'parameter_list', 'CLOSE_BRACKET']]
+functions                      = [['function', 'functions'], ['function']]
+iterative                      = [['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE', 'statements'], ['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE'], ['FOR', 'OPEN_BRACKET', 'SEMI_COLON', 'SEMI_COLON', 'CLOSE_BRACKET', 'NEWLINE']]
+logical_expression             = [['relational_expression', 'relational_expression']]
+main                           = [['MAIN', 'NEWLINE', 'statements']]
+ops                            = [['HIGH_ARITH'], ['LOW_ARITH']]
+parameter_list                 = [['DATA_TYPE', 'IDENTIFIER', 'COMMA', 'parameter_list'], ['DATA_TYPE', 'IDENTIFIER']]
+program                        = [['functions', 'main'], ['main']]
+relational_expression          = [['arithmetic_expression', 'REL_OP', 'arithmetic_expression']]
+relational_expressions         = [['LOGICAL_OP', 'relational_expression'], ['LOGICAL_OP', 'relational_expression', 'relational_expressions']]
+return_type                    = [['RETURN', 'expression']]
+statement                      = [['assignment_statement'], ['declaration_statement'], ['conditional'], ['iterative'], ['function_call'], ['OP', 'expression'], ['OP_NEWLINE']]
+statements                     = [['TAB', 'statement', 'SEMI_COLON', 'NEWLINE'], ['TAB', 'statement', 'SEMI_COLON', 'statements']]
+term                           = [['factor'], ['factor', 'LOW_ARITH', 'factor']]
 
-NON TERMINALS 41
-~arth_ex
-~ass_st
-~boolean
-~char
-~conditional
-~data_type
-~decl_st
-~digit
-~digits
-~expression
-~expressions
-~factor
-~float
-~fn_hdr
-~function
-~function_body
-~function_call
-~functions
-~int
-~iter
-~ldu
-~ldus
-~letter
-~log_ex
-~main
-~name
-~newline
-~non_zero_digit
-~op_st
-~ops
-~param_list
-~program
-~rel_ex
-~rel_exs
-~return_type
-~st
-~string
-~sts
-~term
-~val_in_str
-~val_str
+NON TERMINALS 24
+arithmetic_expression
+assignment_statement
+conditional
+declaration_statement
+expression
+expressions
+factor
+function
+function_body
+function_call
+function_header
+functions
+iterative
+logical_expression
+main
+ops
+parameter_list
+program
+relational_expression
+relational_expressions
+return_type
+statement
+statements
+term
 
-TERMINALS 99
-!=
-"
-#
-&&
-'
-(
-)
-*
-+
-,
--
-.
-/
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-;
-<
-<=
-=
-==
->
->=
-A
-B
-C
-D
-E
-F
-G
-H
-I
-J
-K
-L
-M
-N
-O
-P
-Q
-R
-S
-T
-U
-V
-W
-X
-Y
-Z
-^
-_
-`
-a
-b
-boolean
-c
-char
-d
-e
-else
-f
-false
-float
-for
-g
-h
-i
-if
-int
-j
-k
-l
-m
-main()
-n
-newline()
-o
-output
-p
-q
-r
-return
-s
-string
-t
-true
-u
-v
-w
-x
-y
-z
+TERMINALS 23
+ASMT
+CLOSE_BRACKET
+COMMA
+DATA_TYPE
+ELSE
+FOR
+HIGH_ARITH
+IDENTIFIER
+IF
+LITERAL
+LOGICAL_OP
+LOW_ARITH
+MAIN
+NEWLINE
+NUMBER
+NUMER
+OP
+OPEN_BRACKET
+OP_NEWLINE
+REL_OP
+RETURN
+SEMI_COLON
+TAB
