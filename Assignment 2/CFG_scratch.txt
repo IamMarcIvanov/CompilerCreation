@@ -25,7 +25,7 @@
 {expression} ::= {ath_exp}
 {expression} ::= {rel_exp}
 {expression} ::= {log_exp}
-{expression} ::= {fn_call}
+{expression} ::= [CALL] [IDENTIFIER] {stmt2}
 {expression} ::= [LITERAL]
 {ath_exp} ::= {term} [HIGH_ARITH] {term}
 {ath_exp} ::= {term}
@@ -35,3 +35,12 @@
 {factor} ::= [IDENTIFIER]
 {rel_exp} ::= {ath_exp} [REL_OP] {ath_exp}
 {log_exp} ::= {rel_exp} [LOGIC_OP] {rel_exp}
+{fn_call_left_fac} ::= [CLOSE_BRACKET]
+{fn_call_left_fac} ::= {expressions} [CLOSE_BRACKET]
+{expressions} ::= {expression} {expn_left_fac}
+{expn_left_fac} ::= [COMMA] {expressions}
+{expn_left_fac} ::= ''
+{iterative} ::= [WHILE] [OPEN_BRACKET] {rel_exp} [CLOSE_BRACKET] [NEWLINE] {statements}
+{conditional} ::= [IF] [OPEN_BRACKET] {rel_exp} [CLOSE_BRACKET] {statements} {conditional_else}
+{conditional_else} ::= [ELSE] {statements}
+{conditional_else} ::= ''
