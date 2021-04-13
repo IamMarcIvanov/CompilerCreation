@@ -27,8 +27,9 @@
 {expression} ::= {log_exp}
 {expression} ::= [CALL] [IDENTIFIER] {stmt2}
 {expression} ::= [LITERAL]
-{ath_exp} ::= {term} [HIGH_ARITH] {term}
-{ath_exp} ::= {term}
+{ath_exp} ::= {term} {half_ath}
+{half_ath} ::= [HIGH_ARITH] {term}
+{half_ath} ::= ''
 {term} ::= {factor} {half_term}
 {half_term} ::= [LOW_ARITH] {factor}
 {half_term} ::= ''
