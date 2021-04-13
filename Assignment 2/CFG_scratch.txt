@@ -29,8 +29,9 @@
 {expression} ::= [LITERAL]
 {ath_exp} ::= {term} [HIGH_ARITH] {term}
 {ath_exp} ::= {term}
-{term} ::= {factor} [LOW_ARITH] {factor}
-{term} ::= {factor}
+{term} ::= {factor} {half_term}
+{half_term} ::= [LOW_ARITH] {factor}
+{half_term} ::= ''
 {factor} ::= [NUMBER]
 {factor} ::= [IDENTIFIER]
 {rel_exp} ::= {ath_exp} [REL_OP] {ath_exp}
