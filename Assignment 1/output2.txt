@@ -1,0 +1,9 @@
+************Token*************************Lexeme*********************Line Number**********
+           keyword                         int                            1               
+             name                           x                             1               
+       special_symbols                      ;                             1               
+          whitespace                     newline                          1               
+           keyword                         int                            2               
+             name                           y                             2               
+       special_symbols                      ;                             2               
+          whitespace                     newline                          2               

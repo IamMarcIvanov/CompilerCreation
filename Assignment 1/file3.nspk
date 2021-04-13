@@ -1,0 +1,11 @@
+# This files shows several possible errors
+boolean a@29(int sum, int params, float cost)
+		# yugvdcbddcn
+	string s = "something
+	string y = "something else"
+	return params + 2 * y;
+	
+	     
+main()
+	float x = 1.2.1; # I don't jnow what is happening here
+# what are you doing?

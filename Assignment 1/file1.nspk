@@ -1,0 +1,15 @@
+# this is just a simple factorial program
+int fact(int n, char c)
+	if n <= 1
+		return 1;
+	else
+		return n * fact(n - 1);
+# our main() function does not have return type
+# it also does not take any arguments
+main()
+	int x ;
+	x = 1 ;
+	for(; x<=10 ; +1)
+		output(x);  # does not print newline at the end
+		output( fact(x) );
+		newline();
