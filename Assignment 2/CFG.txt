@@ -10,7 +10,7 @@
 {statement}@{assignment_statement} | {declaration_statement} | {conditional} | {iterative} | {function_call} | [OP] {expression} | [OP_NEWLINE]
 {assignment_statement}@[DATA_TYPE] [IDENTIFIER]  [ASMT]  {expression} | [IDENTIFIER]  [ASMT]  {expression}
 {declaration_statement}@[DATA_TYPE]  [IDENTIFIER]
-{expression}@[LITERAL] {arithmetic_expression} | {relational_expression} | {logical_expression} | {function_call}
+{expression}@[LITERAL] | {arithmetic_expression} | {relational_expression} | {logical_expression} | {function_call}
 {arithmetic_expression}@{term}  [HIGH_ARITH]  {term}
 {term}@{factor}|{factor}  [LOW_ARITH]  {factor}
 {factor}@[IDENTIFIER] | [NUMBER]

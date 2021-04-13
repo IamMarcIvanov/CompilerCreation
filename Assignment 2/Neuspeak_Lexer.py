@@ -13,9 +13,11 @@ class Lexer:
         self.booleans = ['true', 'false']
         
         self.getTokenStream()
+        self.tokenStream.append('$')
 
     def getTokenStream(self):
         with open(output_path, "w") as out_file:
+            console = sys.stdout
             sys.stdout = out_file
             print("{:*^30}{:*^30}{:*^30}".format("Token", "Lexeme", "Line Number"))
             with open(code_path, 'r') as f:
@@ -198,6 +200,6 @@ class Lexer:
                         except IndexError:
                             print("{:^30}{:^30}{:^30}".format('LEXER ERROR', line[len(line) - 1], line_counter + 1))
                             break
-                
+            sys.stdout = console
 obj = Lexer()               
                 

@@ -35,6 +35,7 @@ class FFT:
             self.FIRST[nt] = set()
             self.FOLLOW[nt] = set()
         self.FOLLOW[self.cfg.start_nt].add('$')
+        self.FIRST['~'] = set('~')
         
         self.table[0].append('')
         for t in sorted(self.cfg.T):
@@ -62,11 +63,14 @@ class FFT:
             fi  = copy.deepcopy(self.FIRST)
             for nt in self.cfg.productions.keys():
                 for rhs in self.cfg.productions[nt]:
-                    if rhs[0][0].isupper():
+                    if rhs[0][0].isupper(): # begins with terminal
                         self.FIRST[nt].add(rhs[0])
-                    else:
-                        if rhs[0] in self.FIRST.keys():
-                            self.FIRST[nt].update(self.FIRST[rhs[0]])
+                    else: # begins with non-terminal
+                        if rhs[0] in self.FIRST.keys(): # if first of that non-terminal exists
+                            if '~' not in self.FIRST[rhs[0]]: # non-terminal in RHS does NOT have epsilon in first
+                                self.FIRST[nt].update(self.FIRST[rhs[0]])
+                            else:
+                                
                         else:
                             continue
             if self.compare(fi, self.FIRST):

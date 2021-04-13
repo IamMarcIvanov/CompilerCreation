@@ -27,10 +27,6 @@ class Parser:
         self.stack = ['$', self.start_nt]
         self.table = self.fftObj.table
         self.NT = sorted(self.fftObj.cfg.NT)
-        with open(stack_loc, 'w') as f:
-            f.write(self.start_nt + '\n')
-            # for token in self.tokenStream:
-                # f.write(str(token) + '\n')
         self.T = sorted(self.fftObj.cfg.T)
         
         self.getTree()
@@ -40,15 +36,11 @@ class Parser:
         count = 0
         while len(self.stack) > 0 and count < 100:
             if self.stack[-1].islower(): # means non-terminal
-                with open(stack_loc, 'a') as f:
-                    f.write('here1\n')
                 row = self.NT.index(self.stack.pop()) + 1
                 col = self.T.index(self.tokenStream[curr]) + 1
-                self.stack + self.table[row][col].split('=')[1].strip().split(' ')[::-1]
+                self.stack.extend(self.table[row][col].split('=')[1].strip().split(' ')[::-1])
             elif self.stack[-1].isupper(): # means terminal
                 if self.stack[-1] == self.tokenStream[curr]:
-                    with open(stack_loc, 'a') as f:
-                        f.write('here1\n')
                     curr += 1
                     self.stack.pop()
                 else:
@@ -57,9 +49,7 @@ class Parser:
                 if self.stack[-1] == '$' and self.tokenStream[curr] == '$':
                     self.stack.pop()
                     curr += 1
-            with open(stack_loc, 'a') as f:
-                f.write(str(self.stack) + '\n')
             count += 1
-
+            print('stack', self.stack)
 obj = Parser()   
                     

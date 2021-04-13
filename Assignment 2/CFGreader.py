@@ -1,4 +1,4 @@
-read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG.txt'
+read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG2.txt'
 write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\prod.txt'
 
 
@@ -44,6 +44,9 @@ class CFG:
                             rhs.append(t_in)
                             self.T.add(t_in)
                             i += t_len + 2
+                        elif RHS[i] == '~':
+                            rhs.append('~')
+                            i += 1
                     self.productions[nt].append(rhs)
     
     def writeCFG(self, loc):
@@ -57,3 +60,4 @@ class CFG:
             f.write('\n' + 'TERMINALS' + ' ' + str(len(self.T)) +'\n')
             for t in sorted(self.T):
                 f.write(t + '\n')
+obj = CFG()
