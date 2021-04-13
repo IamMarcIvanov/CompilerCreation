@@ -22,9 +22,11 @@
 {statement} ::= {iterative}
 {statement} ::= [OP] {expression}
 {statement} ::= [OP_NEWLINE]
-{expression} ::= {term} {half_ath}
-{expression} ::= {term} {half_ath} [REL_OP] {term} {half_ath}
-{expression} ::= {log_exp}
+{expression} ::= {term} {half_ath} {exp1}
+{exp1} ::= ''
+{exp1} ::= [REL_OP] {term} {half_ath} {exp2}
+{exp2} ::= ''
+{exp2} ::= [LOGIC_OP] {term} {half_ath} [REL_OP] {term} {half_ath}
 {expression} ::= [CALL] [IDENTIFIER] {stmt2}
 {expression} ::= [LITERAL]
 {half_ath} ::= [HIGH_ARITH] {term}
@@ -34,7 +36,6 @@
 {half_term} ::= ''
 {factor} ::= [NUMBER]
 {factor} ::= [IDENTIFIER]
-{log_exp} ::= {term} {half_ath} [REL_OP] {term} {half_ath} [LOGIC_OP] {term} {half_ath} [REL_OP] {term} {half_ath}
 {fn_call_left_fac} ::= [CLOSE_BRACKET]
 {fn_call_left_fac} ::= {expressions} [CLOSE_BRACKET]
 {expressions} ::= {expression} {expn_left_fac}
