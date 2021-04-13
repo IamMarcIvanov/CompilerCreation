@@ -1,3 +1,4 @@
+#curr
 {program} ::= {functions} {main} 
 {program} ::= {main}
 {functions} ::= {function} {left_fac_fn} 
@@ -33,17 +34,17 @@
 {term1} ::= ''
 {factor} ::= [IDENTIFIER]
 {factor} ::= [NUMBER]
-{relational_expressions} ::= [LOGICAL_OP] {term} [HIGH_ARITH] {term} [REL_OP] {term} [HIGH_ARITH] {term} {relational_expressions}
+{relational_expressions} ::= [LOGICAL_OP] {term} {exp2} [REL_OP] {term} {exp2} {relational_expressions}
 {relational_expressions} ::= ''
 {main} ::= [MAIN] [NEWLINE] {statements}
 {ops} ::= [HIGH_ARITH]
 {ops} ::= [LOW_ARITH]
-{conditional} ::= [IF] {term} [HIGH_ARITH] {term} [REL_OP] {term} [HIGH_ARITH] {term} {relational_expressions} [NEWLINE] {statements} {conditional_left_fac}
+{conditional} ::= [IF] {term} {exp2} [REL_OP] {term} {exp2} {relational_expressions} [NEWLINE] {statements} {conditional_left_fac}
 {conditional_left_fac} ::= [ELSE] [NEWLINE] {statements}
 {conditional_left_fac} ::= ''
 {iterative} ::= [FOR] [OPEN_BRACKET] {iter1} 
-{iter1} ::= [DATA_TYPE] [IDENTIFIER] [ASMT] {expression} [SEMI_COLON] {term} [HIGH_ARITH] {term} [REL_OP] {term} [HIGH_ARITH] {term} {relational_expressions} [SEMI_COLON] {ops} [NUMBER] [CLOSE_BRACKET] [NEWLINE] {statements}
-{iter1} ::= [IDENTIFIER] [ASMT] {expression} [SEMI_COLON] {term} [HIGH_ARITH] {term} [REL_OP] {term} [HIGH_ARITH] {term} {relational_expressions} [SEMI_COLON] {ops} [NUMBER] [CLOSE_BRACKET] [NEWLINE] {statements} 
+{iter1} ::= [DATA_TYPE] [IDENTIFIER] [ASMT] {expression} [SEMI_COLON] {term} {exp2} [REL_OP] {term} {exp2} {relational_expressions} [SEMI_COLON] {ops} [NUMBER] [CLOSE_BRACKET] [NEWLINE] {statements}
+{iter1} ::= [IDENTIFIER] [ASMT] {expression} [SEMI_COLON] {term} {exp2} [REL_OP] {term} {exp2} {relational_expressions} [SEMI_COLON] {ops} [NUMBER] [CLOSE_BRACKET] [NEWLINE] {statements} 
 {fn_call_left_fac} ::= [CLOSE_BRACKET]
 {fn_call_left_fac} ::= {expressions} [CLOSE_BRACKET]
 {expressions} ::= {expression} {expn_left_fac}

@@ -14,6 +14,10 @@ class Lexer:
         
         self.getTokenStream()
         self.tokenStream.append('$')
+        a = []
+        for item in self.tokenStream:
+            a.append('[' + item + ']')
+        print(a)
 
     def getTokenStream(self):
         with open(output_path, "w") as out_file:
