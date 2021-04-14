@@ -1,0 +1,26 @@
+25
+{program}	=	[MAIN], [DATA_TYPE]	= $
+{functions}	=	[DATA_TYPE]	= [MAIN]
+{left_fac_fn}	=	[DATA_TYPE], [~]	= [MAIN]
+{function}	=	[DATA_TYPE] =	[MAIN], [DATA_TYPE]
+{function_header}	=	[DATA_TYPE]	= [NEWLINE]
+{parameter_list}	=	[DATA_TYPE]	= [CLOSE_BRACKET]
+{params}	=	[COMMA], [~] = [CLOSE_BRACKET]
+{main}	=	[MAIN] =	$
+{statements}	=	[TAB], [~] =	[MAIN], [DATA_TYPE], [CURLY_CLOSE], $
+{statement}	=	[RETURN], [DATA_TYPE], [IDENTIFIER], [OP], [OP_NEWLINE], [IF], [WHILE]	 = [SEMI_COLON]
+{stmt1}	=	[ASMT], [~]	= [SEMI_COLON]
+{stmt2}	=	[ASMT], [OPEN_BRACKET] =	[SEMI_COLON], [CLOSE_BRACKET], [COMMA]
+{expression}	=	[CALL], [LITERAL], [NUMBER], [IDENTIFIER] =	[SEMI_COLON], [CLOSE_BRACKET], [COMMA]
+{exp1}	=	[REL_OP], [~] =	[SEMI_COLON], [CLOSE_BRACKET], [COMMA]
+{exp2}	=	[LOGIC_OP], [~]	= [SEMI_COLON], [CLOSE_BRACKET], [COMMA]
+{half_ath}	=	[HIGH_ARITH], [~]	= [SEMI_COLON], [REL_OP], [LOGIC_OP], [CLOSE_BRACKET], [COMMA]
+{term}	=	[NUMBER], [IDENTIFIER]	= [SEMI_COLON], [REL_OP], [HIGH_ARITH], [LOGIC_OP], [CLOSE_BRACKET], [COMMA]
+{half_term}	=	[LOW_ARITH], [~]	= [SEMI_COLON], [REL_OP], [HIGH_ARITH], [LOGIC_OP], [CLOSE_BRACKET], [COMMA]
+{factor}	=	[NUMBER], [IDENTIFIER] =	[SEMI_COLON], [REL_OP], [HIGH_ARITH], [LOGIC_OP], [LOW_ARITH], [CLOSE_BRACKET], [COMMA]
+{fn_call_left_fac}	=	[CLOSE_BRACKET], [CALL], [LITERAL], [NUMBER], [IDENTIFIER] =	[SEMI_COLON], [CLOSE_BRACKET], [COMMA]
+{expressions}	=	[CALL], [LITERAL], [NUMBER], [IDENTIFIER]	= [CLOSE_BRACKET]
+{expn_left_fac}	=	[COMMA], [~] =	[CLOSE_BRACKET]
+{iterative}	=	[WHILE] =	[SEMI_COLON]
+{conditional}	=	[IF]	= [SEMI_COLON]
+{conditional_else}	=	[ELSE], [~] =	[SEMI_COLON]

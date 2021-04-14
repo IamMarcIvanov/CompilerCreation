@@ -1,5 +1,5 @@
 from Neuspeak_Lexer import *
-from FFT import *
+from first_follow_getters import *
 
 
 read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG.txt'
@@ -8,6 +8,8 @@ write_first = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2
 write_follow = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\follow.txt'
 write_table = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\table.txt'
 stack_loc =  r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\stack.txt'
+
+ts = '[MAIN] [NEWLINE] [TAB] [WHILE] [OPEN_BRACKET] [IDENTIFIER] [REL_OP] [NUMBER] [CLOSE_BRACKET] [NEWLINE] [CURLY_OPEN] [NEWLINE] [TAB] [IDENTIFIER] [ASMT] [NUMBER] [SEMI_COLON] [NEWLINE] [CURLY_CLOSE] [SEMI_COLON] [NEWLINE] $'
 
 class ParseTree:
     def __init__(self):
@@ -19,15 +21,16 @@ class ParseTree:
 class Parser:
     def __init__(self):
         self.root = ParseTree()
-        self.lex = Lexer() # lex object has a member self.lex.tokens is list of tokens
-        self.tokenStream = self.lex.tokenStream
-        
-        self.fftObj = FFT()
-        self.start_nt = self.fftObj.cfg.start_nt
+        #self.lex = Lexer() # lex object has a member self.lex.tokenStream is list of tokens
+        #self.tokenStream = self.lex.tokenStream
+        self.tokenStream = ts.split()
+        print(self.tokenStream)
+        self.fftObj = FirstFollowTable()
+        self.start_nt = self.fftObj.start_nt
         self.stack = ['$', self.start_nt]
         self.table = self.fftObj.table
-        self.NT = sorted(self.fftObj.cfg.NT)
-        self.T = sorted(self.fftObj.cfg.T)
+        self.NT = sorted(self.fftObj.NT)
+        self.T = sorted(self.fftObj.T)
         
         self.getTree()
         
@@ -35,11 +38,11 @@ class Parser:
         curr = 0
         count = 0
         while len(self.stack) > 0 and count < 100:
-            if self.stack[-1].islower(): # means non-terminal
+            if self.stack[-1].startswith('{'): # means non-terminal
                 row = self.NT.index(self.stack.pop()) + 1
                 col = self.T.index(self.tokenStream[curr]) + 1
-                self.stack.extend(self.table[row][col].split('=')[1].strip().split(' ')[::-1])
-            elif self.stack[-1].isupper(): # means terminal
+                self.stack.extend(self.table[row][col].split('=')[1].strip().split(' ')[::-1]) # get RHS of rule
+            elif self.stack[-1].startswith('['): # means terminal
                 if self.stack[-1] == self.tokenStream[curr]:
                     curr += 1
                     self.stack.pop()
@@ -50,6 +53,6 @@ class Parser:
                     self.stack.pop()
                     curr += 1
             count += 1
-            print('stack', self.stack)
+            #print('stack', self.stack)
 obj = Parser()   
                     

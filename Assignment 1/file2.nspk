@@ -1,4 +1,5 @@
-int x; # hello
-int y;
-# hello
-# hello2
+main()
+	while(a < 4)
+{
+	a = 2;
+};

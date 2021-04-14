@@ -1,87 +1,79 @@
-PRODUCTIONS 30
-arithmetic_expression          = [['term', 'HIGH_ARITH', 'term']]
-assignment_statement           = [['DATA_TYPE', 'IDENTIFIER', 'ASMT', 'expression'], ['IDENTIFIER', 'ASMT', 'expression']]
-conditional                    = [['IF', 'logical_expression', 'NEWLINE', 'statements', 'conditional_left_fac']]
-conditional_left_fac           = [['ELSE', 'NEWLINE', 'statements'], ['~']]
-declaration_statement          = [['DATA_TYPE', 'IDENTIFIER']]
-expn_left_fac                  = [['COMMA', 'expressions'], ['~']]
-expression                     = [['LITERAL'], ['arithmetic_expression'], ['relational_expression'], ['logical_expression'], ['function_call']]
-expressions                    = [['expression', 'expn_left_fac']]
-factor                         = [['IDENTIFIER'], ['NUMBER']]
-fn_call_left_fac               = [['CLOSE_BRACKET'], ['expressions', 'CLOSE_BRACKET']]
-function                       = [['function_header', 'NEWLINE', 'function_body']]
-function_body                  = [['statements', 'TAB', 'return_type', 'SEMI_COLON', 'NEWLINE']]
-function_call                  = [['IDENTIFIER', 'OPEN_BRACKET', 'fn_call_left_fac']]
-function_header                = [['DATA_TYPE', 'IDENTIFIER', 'OPEN_BRACKET', 'parameter_list', 'CLOSE_BRACKET']]
-functions                      = [['function', 'functions'], ['function']]
-iterative                      = [['FOR', 'OPEN_BRACKET', 'assignment_statement', 'SEMI_COLON', 'logical_expression', 'SEMI_COLON', 'ops', 'NUMBER', 'CLOSE_BRACKET', 'NEWLINE', 'statements']]
-left_fac_rel_ex                = [['relational_expressions'], ['~']]
-left_fac_stmt                  = [['NEWLINE'], ['statements']]
-logical_expression             = [['relational_expression', 'relational_expressions']]
-main                           = [['MAIN', 'NEWLINE', 'statements']]
-ops                            = [['HIGH_ARITH'], ['LOW_ARITH']]
-parameter_list                 = [['DATA_TYPE', 'IDENTIFIER', 'params']]
-params                         = [['COMMA', 'parameter_list'], ['~']]
-program                        = [['functions', 'main'], ['main']]
-relational_expression          = [['arithmetic_expression', 'REL_OP', 'arithmetic_expression']]
-relational_expressions         = [['LOGICAL_OP', 'relational_expression', 'left_fac_rel_ex']]
-return_type                    = [['RETURN', 'expression']]
-statement                      = [['assignment_statement'], ['declaration_statement'], ['conditional'], ['iterative'], ['function_call'], ['OP', 'expression'], ['OP_NEWLINE']]
-statements                     = [['TAB', 'statement', 'SEMI_COLON', 'left_fac_stmt']]
-term                           = [['factor'], ['factor', 'LOW_ARITH', 'factor']]
+PRODUCTIONS 25
+{conditional_else}             = [['[ELSE]', '[NEWLINE]', '[CURLY_OPEN]', '[NEWLINE]', '{statements}', '[CURLY_CLOSE]'], ['[~]']]
+{conditional}                  = [['[IF]', '[OPEN_BRACKET]', '{term}', '{half_ath}', '[REL_OP]', '{term}', '{half_ath}', '[CLOSE_BRACKET]', '[NEWLINE]', '[CURLY_OPEN]', '[NEWLINE]', '{statements}', '[CURLY_CLOSE]', '{conditional_else}']]
+{exp1}                         = [['[~]'], ['[REL_OP]', '{term}', '{half_ath}', '{exp2}']]
+{exp2}                         = [['[~]'], ['[LOGIC_OP]', '{term}', '{half_ath}', '[REL_OP]', '{term}', '{half_ath}']]
+{expn_left_fac}                = [['[COMMA]', '{expressions}'], ['[~]']]
+{expressions}                  = [['{expression}', '{expn_left_fac}']]
+{expression}                   = [['{term}', '{half_ath}', '{exp1}'], ['[CALL]', '[IDENTIFIER]', '{stmt2}'], ['[LITERAL]']]
+{factor}                       = [['[NUMBER]'], ['[IDENTIFIER]']]
+{fn_call_left_fac}             = [['[CLOSE_BRACKET]'], ['{expressions}', '[CLOSE_BRACKET]']]
+{function_header}              = [['[DATA_TYPE]', '[IDENTIFIER]', '[OPEN_BRACKET]', '{parameter_list}', '[CLOSE_BRACKET]']]
+{functions}                    = [['{function}', '{left_fac_fn}']]
+{function}                     = [['{function_header}', '[NEWLINE]', '{statements}']]
+{half_ath}                     = [['[HIGH_ARITH]', '{term}'], ['[~]']]
+{half_term}                    = [['[LOW_ARITH]', '{factor}'], ['[~]']]
+{iterative}                    = [['[WHILE]', '[OPEN_BRACKET]', '{term}', '{half_ath}', '[REL_OP]', '{term}', '{half_ath}', '[CLOSE_BRACKET]', '[NEWLINE]', '[CURLY_OPEN]', '[NEWLINE]', '{statements}', '[CURLY_CLOSE]']]
+{left_fac_fn}                  = [['{functions}'], ['[~]']]
+{main}                         = [['[MAIN]', '[NEWLINE]', '{statements}']]
+{parameter_list}               = [['[DATA_TYPE]', '[IDENTIFIER]', '{params}']]
+{params}                       = [['[COMMA]', '{parameter_list}'], ['[~]']]
+{program}                      = [['{functions}', '{main}'], ['{main}']]
+{statements}                   = [['[TAB]', '{statement}', '[SEMI_COLON]', '[NEWLINE]', '{statements}'], ['[~]']]
+{statement}                    = [['[RETURN]', '', '{expression}'], ['[DATA_TYPE]', '[IDENTIFIER]', '{stmt1}'], ['[IDENTIFIER]', '{stmt2}'], ['{conditional}'], ['{iterative}'], ['[OP]', '{expression}'], ['[OP_NEWLINE]']]
+{stmt1}                        = [['[ASMT]', '{expression}'], ['[~]']]
+{stmt2}                        = [['[ASMT]', '{expression}'], ['[OPEN_BRACKET]', '{fn_call_left_fac}']]
+{term}                         = [['{factor}', '{half_term}']]
 
-NON TERMINALS 30
-arithmetic_expression
-assignment_statement
-conditional
-conditional_left_fac
-declaration_statement
-expn_left_fac
-expression
-expressions
-factor
-fn_call_left_fac
-function
-function_body
-function_call
-function_header
-functions
-iterative
-left_fac_rel_ex
-left_fac_stmt
-logical_expression
-main
-ops
-parameter_list
-params
-program
-relational_expression
-relational_expressions
-return_type
-statement
-statements
-term
+NON TERMINALS 25
+{conditional_else}
+{conditional}
+{exp1}
+{exp2}
+{expn_left_fac}
+{expressions}
+{expression}
+{factor}
+{fn_call_left_fac}
+{function_header}
+{functions}
+{function}
+{half_ath}
+{half_term}
+{iterative}
+{left_fac_fn}
+{main}
+{parameter_list}
+{params}
+{program}
+{statements}
+{statement}
+{stmt1}
+{stmt2}
+{term}
 
-TERMINALS 22
-ASMT
-CLOSE_BRACKET
-COMMA
-DATA_TYPE
-ELSE
-FOR
-HIGH_ARITH
-IDENTIFIER
-IF
-LITERAL
-LOGICAL_OP
-LOW_ARITH
-MAIN
-NEWLINE
-NUMBER
-OP
-OPEN_BRACKET
-OP_NEWLINE
-REL_OP
-RETURN
-SEMI_COLON
-TAB
+TERMINALS 24
+[ASMT]
+[CALL]
+[CLOSE_BRACKET]
+[COMMA]
+[CURLY_CLOSE]
+[DATA_TYPE]
+[ELSE]
+[HIGH_ARITH]
+[IDENTIFIER]
+[IF]
+[LITERAL]
+[LOGIC_OP]
+[LOW_ARITH]
+[MAIN]
+[NEWLINE]
+[NUMBER]
+[OPEN_BRACKET]
+[OP]
+[OP_NEWLINE]
+[REL_OP]
+[RETURN]
+[SEMI_COLON]
+[TAB]
+[WHILE]

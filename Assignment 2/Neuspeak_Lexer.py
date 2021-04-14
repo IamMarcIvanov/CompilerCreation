@@ -2,7 +2,7 @@ import string
 import sys
 
 
-code_path = r"E:\BITS\Yr 3 Sem 2\CS F363 Compiler Construction\Assignments\Assignment 1\file4.nspk"
+code_path = r"D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 1\file2.nspk"
 output_path = r"D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 1\output4.txt"
 
 class Lexer:
