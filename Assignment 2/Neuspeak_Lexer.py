@@ -2,22 +2,19 @@ import string
 import sys
 
 
-code_path = r"D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 1\file2.nspk"
-output_path = r"D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 1\output4.txt"
+code_path = r"D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\Submission\fileC.nspk"
+output_path = r"D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\Submission\opC.txt"
 
 class Lexer:
     def __init__(self):
         self.tokenStream = []
-        self.keywords = ['main()', 'return', 'else', 'if', 'output', 'for', 'newline()']
+        self.keywords = ['main()', 'return', 'else', 'if', 'output', 'while', 'newline()']
         self.dataType = ['int', 'boolean', 'char', 'float', 'string']
         self.booleans = ['true', 'false']
         
         self.getTokenStream()
         self.tokenStream.append('$')
-        a = []
-        for item in self.tokenStream:
-            a.append('[' + item + ']')
-        print(a)
+        self.writeStream()
 
     def getTokenStream(self):
         with open(output_path, "w") as out_file:
@@ -47,85 +44,110 @@ class Lexer:
                                     if line[i: i + leng] == dt and line[i + leng] == ' ':
                                         i += leng
                                         print("{:^30}{:^30}{:^30}".format('DATA_TYPE', dt, line_counter + 1))
-                                        self.tokenStream.append('DATA_TYPE')
+                                        self.tokenStream.append('[DT]')
                             for dt in self.keywords:
                                 leng = len(dt)
                                 if line[i] == dt[0] and leng < len(line) - i:
                                     if line[i: i + leng] == dt and line[i + leng] in ' \n(;':
                                         i += leng
                                         ty = dt.replace('()', '').upper()
+                                        ts = ''
                                         if ty == 'NEWLINE':
-                                            ty = 'OP_NEWLINE'
+                                            ts = 'ON'
                                         if ty == 'OUTPUT':
-                                            ty = "OP"
+                                            ts = "OP"
+                                        if ty == 'WHILE':
+                                            ts = 'W'
+                                        if ty == 'ELSE':
+                                            ts='E'
+                                        if ty == 'RETURN':
+                                            ts = 'R'
+                                        if ty == 'MAIN':
+                                            ts = 'M'
+                                        if ty == 'IF':
+                                            ts = 'IF'
+                                        ts = '[' + ts + ']'
                                         print("{:^30}{:^30}{:^30}".format(ty, dt, line_counter + 1))
-                                        self.tokenStream.append(ty)
+                                        self.tokenStream.append(ts)
                             for boo in self.booleans:
                                 leng = len(boo)
                                 if line[i] == boo[0] and leng < len(line) - i:
                                     if line[i: i + leng] == boo and line[i + leng] in ' ;':
                                         i += leng
                                         print("{:^30}{:^30}{:^30}".format('LITERAL', boo, line_counter + 1))
-                                        self.tokenStream.append('LITERAL')
+                                        self.tokenStream.append('[L]')
                             if line[i] == '>' and line[i + 1] == '=':
                                 i += 2
                                 print("{:^30}{:^30}{:^30}".format('REL_OP', '>=', line_counter + 1))
-                                self.tokenStream.append('REL_OP')
+                                self.tokenStream.append('[RO]')
                             elif line[i] == '<' and line[i + 1] == '=':
                                 i += 2
                                 print("{:^30}{:^30}{:^30}".format('REL_OP', '<=', line_counter + 1))
-                                self.tokenStream.append('REL_OP')
+                                self.tokenStream.append('[RO]')
                             elif line[i] == '!' and line[i + 1] == '=':
                                 i += 2
                                 print("{:^30}{:^30}{:^30}".format('REL_OP', '!=', line_counter + 1))
-                                self.tokenStream.append('REL_OP')
+                                self.tokenStream.append('[RO]')
                             elif line[i] == '=' and line[i + 1] == '=':
                                 i += 2
                                 print("{:^30}{:^30}{:^30}".format('REL_OP', '==', line_counter + 1))
+                                self.tokenStream.append('[RO]')
                             elif line[i] == '|' and line[i + 1] == '|':
                                 i += 2
                                 print("{:^30}{:^30}{:^30}".format('LOGIC_OP', '||', line_counter + 1))
-                                self.tokenStream.append('LOGIC_OP')
+                                self.tokenStream.append('[LO]')
                             elif line[i] == '&' and line[i + 1] == '&':
                                 i += 2
                                 print("{:^30}{:^30}{:^30}".format('LOGIC_OP', '&&', line_counter + 1))
-                                self.tokenStream.append('LOGIC_OP')
+                                self.tokenStream.append('[LO]')
                             elif line[i] == '(':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('OPEN_BRACKET', '(', line_counter + 1))
-                                self.tokenStream.append('OPEN_BRACKET')
+                                self.tokenStream.append('[OB]')
+                            elif line[i] == '{':
+                                i += 1
+                                print("{:^30}{:^30}{:^30}".format('CURLY_OPEN', '(', line_counter + 1))
+                                self.tokenStream.append('[CO]')
                             elif line[i] == ')':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('CLOSE_BRACKET', ')', line_counter + 1))
-                                self.tokenStream.append('CLOSE_BRACKET')
+                                self.tokenStream.append('[CB]')
+                            elif line[i] == '}':
+                                i += 1
+                                print("{:^30}{:^30}{:^30}".format('CURLY_CLOSE', ')', line_counter + 1))
+                                self.tokenStream.append('[CC]')
                             elif line[i] == ',':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('COMMA', ',', line_counter + 1))
-                                self.tokenStream.append('COMMA')
+                                self.tokenStream.append('[C]')
                             elif line[i] == '+':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('LOW_ARITH', '+', line_counter + 1))
-                                self.tokenStream.append('LOW_ARITH')
+                                self.tokenStream.append('[LA]')
+                            elif line[i] == '@':
+                                i += 1
+                                print("{:^30}{:^30}{:^30}".format('CALL', ',', line_counter + 1))
+                                self.tokenStream.append('[CL]')
                             elif line[i] == '-':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('LOW_ARITH', '-', line_counter + 1))
-                                self.tokenStream.append('LOW_ARITH')
+                                self.tokenStream.append('[LA]')
                             elif line[i] == '*':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('HIGH_ARITH', '*', line_counter + 1))
-                                self.tokenStream.append('HIGH_ARITH')
+                                self.tokenStream.append('[HA]')
                             elif line[i] == '/':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('HIGH_ARITH', '/', line_counter + 1))
-                                self.tokenStream.append('HIGH_ARITH')
+                                self.tokenStream.append('[HA]')
                             elif line[i] == '<':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('REL_OP', '<', line_counter + 1))
-                                self.tokenStream.append('REL_OP')
+                                self.tokenStream.append('[RO]')
                             elif line[i] == '>':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('REL_OP', '>', line_counter + 1))
-                                self.tokenStream.append('REL_OP')
+                                self.tokenStream.append('[RO]')
                             elif line[i] == '#':
                                 i = len(line) - 1
                                 line_counter += 1
@@ -140,30 +162,30 @@ class Lexer:
                                     i += 1
                                 if line[i] == '"':
                                     print("{:^30}{:^30}{:^30}".format('LITERAL', '"' + temp + '"', line_counter + 1))
-                                    self.tokenStream.append('LITERAL')
+                                    self.tokenStream.append('[L]')
                                     i += 1
                                 else:
                                     print("{:^30}{:^30}{:^30}".format('LEXER ERROR', '"', line_counter + 1))
                             elif line[i] == "'":
                                 if line[i + 1] in string.ascii_letters + string.digits + '_' and line[i + 2] == "'":
                                     print("{:^30}{:^30}{:^30}".format('LITERAL', "'" + line[i + 1] + "'", line_counter + 1))
-                                    self.tokenStream.append('LITERAL')
+                                    self.tokenStream.append('[L]')
                                     i += 3
                             elif line[i] == '\t':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('TAB', '(tab)', line_counter + 1))
-                                self.tokenStream.append('TAB')
+                                self.tokenStream.append('[T]')
                             # elif line[i] == '_':
                                 # i += 1
                                 # print("{:^30}{:^30}{:^30}".format('special_symbols', '_', line_counter + 1))
                             elif line[i] == '=':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('ASMT', '=', line_counter + 1))
-                                self.tokenStream.append('ASMT')
+                                self.tokenStream.append('[AS]')
                             elif line[i] == ';':
                                 i += 1
                                 print("{:^30}{:^30}{:^30}".format('SEMI_COLON', ';', line_counter + 1))
-                                self.tokenStream.append('SEMI_COLON')
+                                self.tokenStream.append('[SC]')
                             elif line[i] in string.digits:
                                 temp = ''
                                 while line[i] in string.digits:
@@ -178,10 +200,10 @@ class Lexer:
                                             i += 1
                                 if '.' in temp:
                                     print("{:^30}{:^30}{:^30}".format('NUMBER', temp, line_counter + 1))
-                                    self.tokenStream.append('NUMBER')
+                                    self.tokenStream.append('[N]')
                                 else:
                                     print("{:^30}{:^30}{:^30}".format('NUMBER', temp, line_counter + 1))
-                                    self.tokenStream.append('NUMBER')
+                                    self.tokenStream.append('[N]')
                             elif line[i] in string.ascii_letters:
                                 temp = ''
                                 while line[i] in string.ascii_letters + string.digits + '_':
@@ -190,11 +212,11 @@ class Lexer:
                                 else:
                                     if line[i] in ' (;),':
                                         print("{:^30}{:^30}{:^30}".format('IDENTIFIER', temp, line_counter + 1))
-                                        self.tokenStream.append('IDENTIFIER')
+                                        self.tokenStream.append('[ID]')
                             elif line[i] == '\n':
                                 if not comment_flag:
                                     print("{:^30}{:^30}{:^30}".format("NEWLINE", "newline", line_counter + 1))
-                                    self.tokenStream.append('NEWLINE')
+                                    self.tokenStream.append('[NL]')
                                     line_counter += 1
                                 i += 1
                             else:
@@ -205,5 +227,11 @@ class Lexer:
                             print("{:^30}{:^30}{:^30}".format('LEXER ERROR', line[len(line) - 1], line_counter + 1))
                             break
             sys.stdout = console
+    
+    def writeStream(self):
+        with open(output_path, 'a') as f:
+            f.write('\n\n\nTOKEN STREAM\n')
+            for ts in self.tokenStream:
+                f.write(ts + '\n')
 obj = Lexer()               
                 

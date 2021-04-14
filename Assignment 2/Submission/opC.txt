@@ -1,0 +1,28 @@
+************Token*************************Lexeme*********************Line Number**********
+             MAIN                         main()                          1               
+           NEWLINE                       newline                          1               
+             TAB                          (tab)                           2               
+          DATA_TYPE                        int                            2               
+          IDENTIFIER                        y                             2               
+           NEWLINE                       newline                          2               
+             TAB                          (tab)                           3               
+          DATA_TYPE                        int                            3               
+          IDENTIFIER                        x                             3               
+          SEMI_COLON                        ;                             3               
+          SEMI_COLON                        ;                             3               
+
+
+
+TOKEN STREAM
+[M]
+[NL]
+[T]
+[DT]
+[ID]
+[NL]
+[T]
+[DT]
+[ID]
+[SC]
+[SC]
+$

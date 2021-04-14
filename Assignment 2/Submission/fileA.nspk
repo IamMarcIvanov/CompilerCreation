@@ -1,0 +1,13 @@
+int hell (float b, string s)
+	a = 3 ; ;
+main()
+	int y ;
+	x = 1 ;
+	while ( x <= 10 )
+{
+	y = y + 1 ;
+};
+	if ( a == y )
+{
+	y = 1 ;
+};

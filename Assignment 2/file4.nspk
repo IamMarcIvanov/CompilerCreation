@@ -1,0 +1,9 @@
+# Program to print sum of first 10 numbers
+main()
+	string s = "Sum of first 10 numbers is ";
+	int sum = 0;
+	for(int i = 0 ; i < len ; +1)
+		sum = sum + i;
+	output(s);
+	output(sum);
+	newline();

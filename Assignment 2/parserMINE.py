@@ -1,5 +1,6 @@
 from first_follow_getters import *
 import copy
+from Neuspeak_Lexer import *
 
 read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG.txt'
 write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\prod.txt'
@@ -9,7 +10,6 @@ write_table = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2
 stack_loc =  r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\stack.txt'
 write_actionTable_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\actionTable.txt'
 
-ts = '[M] [NL] [T] [DT] [ID] [AS] [N] [SC] [NL] $'
 
 class ParseTree:
     def __init__(self):
@@ -21,10 +21,10 @@ class ParseTree:
 class Parser:
     def __init__(self):
         self.root = ParseTree()
-        #self.lex = Lexer() # lex object has a member self.lex.tokenStream is list of tokens
-        #self.tokenStream = self.lex.tokenStream
+        self.lex = Lexer() # lex object has a member self.lex.tokenStream is list of tokens
+        self.tokenStream = self.lex.tokenStream
         
-        self.tokenStream = ts.split()
+        #self.tokenStream = ts.split()
         self.fftObj = FirstFollowTable()
         self.start_nt = self.fftObj.start_nt
         self.stack = ['$', self.start_nt]
@@ -64,7 +64,7 @@ class Parser:
     def getTree(self):
         curr = 0
         count = 0
-        while len(self.stack) > 0 and count < 100 and curr < len(self.tokenStream):
+        while len(self.stack) > 0 and count < 1000 and curr < len(self.tokenStream):
             if self.stack[-1].startswith('{'): # means non-terminal
                 row = self.NT.index(self.stack[-1]) + 1
                 col = self.table[0].index(self.tokenStream[curr])
@@ -77,34 +77,42 @@ class Parser:
                 else:
                     if self.table[row][col].strip() == 'sync':
                         self.stack.pop()
+                        self.setNode()
                         self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'sync' + '*' * 6])
                     if self.table[row][col].strip() == 'skip':
-                        curr += 1
-                        self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'skip' + '*' * 6])
+                        curr += 1 if self.tokenStream[curr] != '$' else 0
+                        if self.tokenStream[curr] == '$':
+                            self.stack.pop()
+                            self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'sync' + '*' * 6])
+                        else:
+                            self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'skip' + '*' * 6])
             elif self.stack[-1].startswith('['): # means top of stack is terminal or epsilon
                 if self.stack[-1] == self.tokenStream[curr]: # match found
                     curr += 1
                     termin = self.stack.pop()
                     self.actionTable.append([self.tokenStream[curr:], self.stack[:], 'match ' + str(termin)])
                     self.setNode()
-                    #self.currNode = self.currNode.parent.children[self.currNode.index - 1]
                 elif self.stack[-1] == '[~]':
                     termin = self.stack.pop()
                     self.actionTable.append([self.tokenStream[curr:], self.stack[:], 'epsilon pop ' + str(termin)])
                     self.setNode()
-                    #self.currNode = self.currNode.parent.children[self.currNode.index - 1]
                 else:
                     row = self.NT.index(self.currNode.parent.data) + 1
                     col = self.table[0].index(self.tokenStream[curr])
                     if self.table[row][col].strip() == 'sync':
                         self.stack.pop()
+                        self.setNode()
                         self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'sync' + '*' * 6])
                     elif self.table[row][col].strip() == 'skip':
-                        curr += 1
-                        self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'skip' + '*' * 6])
+                        curr += 1 if self.tokenStream[curr] != '$' else 0
+                        if self.tokenStream[curr] == '$':
+                            self.stack.pop()
+                            self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'sync' + '*' * 6])
+                        else:
+                            self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'skip' + '*' * 6])
                     else:
-                        self.actionTable.append([self.tokenStream[curr:], self.stack[:], 'ERROR'])
-                        break
+                        self.stack.pop()
+                        self.actionTable.append([self.tokenStream[curr:], self.stack[:], '*' * 6 + 'sync' + '*' * 6])
             else:
                 if self.stack[-1] == '$' and self.tokenStream[curr] == '$':
                     self.stack.pop()
