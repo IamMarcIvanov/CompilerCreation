@@ -161,6 +161,7 @@ def main():
         if root.data == '':
             return ""
         else:
+            # ' ' + str(root.index) + 
             s = "Node('" + root.data + "')(["
             #root.children.reverse()
             for c in root.children:

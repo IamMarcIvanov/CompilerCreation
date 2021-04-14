@@ -51,17 +51,14 @@ class Parser:
         
     def setNode(self):
         while True:
-            #if self.currNode.index == len(self.currNode.parent.children) - 1:
-            n_unvisited_nt = 0
-            for c in self.currNode.parent.children:
-                if c.index < self.currNode.index and c.data.startswith('{'):
-                    n_unvisited_nt += 1
-                #print(self.currNode.data)
-            if n_unvisited_nt == 0:
+            if self.currNode.data == self.root.data:
+                return
+            if self.currNode.index == 0:
                 self.currNode = self.currNode.parent
             else:
                 #print(self.currNode.data)
                 break
+        
         self.currNode = self.currNode.parent.children[self.currNode.index - 1]
                     
     def getTree(self):
