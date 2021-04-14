@@ -56,6 +56,9 @@ class FirstFollowTable:
                     self.start_nt = nt
                 self.productions[nt] = self.productions.get(nt, [])
                 self.productions[nt].append(line[1].strip().split(' '))
+                for t in line[1].strip().split(' '):
+                    if t.strip().startswith('[') and '~' not in t:
+                        self.T.add(t.strip())
                 
     def setTable(self):
         self.table[0].append('')

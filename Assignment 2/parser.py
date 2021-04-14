@@ -91,11 +91,18 @@ class Parser:
             count += 1
     
     def writeActionTable(self):
+        m = [0, 0, 0]
         with open(write_actionTable_loc, 'w') as f:
-            f.write('{:^300}{:^300}{:^300}'.format('TOKEN STREAM', 'STACK', 'ACTION') + '\n')
+            f.write('{:^300}{:^250}{:^160}'.format('TOKEN STREAM', 'STACK', 'ACTION') + '\n')
             for row in self.actionTable:
-                f.write('{:^300}{:^300}'.format(str(row[0]), str(row[1]), str(row[2])) + '\n')
-            
+                f.write('{:^300}{:^250}{:^160}'.format(str(row[0]), str(row[1]), str(row[2])) + '\n')
+                if len(str(row[0])) > m[0]:
+                    m[0] = len(str(row[0]))
+                if len(str(row[1])) > m[1]:
+                    m[1] = len(str(row[1]))
+                if len(str(row[2])) > m[2]:
+                    m[2] = len(str(row[2]))
+        print(m)
 
 obj = Parser()   
                     
