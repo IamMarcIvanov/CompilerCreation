@@ -1,5 +1,5 @@
-FFTloc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\first_follow_table.txt'
-prodLoc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG_scratch.txt'
+FFTloc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\first_follow_table2.txt'
+prodLoc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG_scratch2.txt'
 write_table_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\table.txt'
 write_first_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\first.txt'
 write_follow_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\follow.txt'

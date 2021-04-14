@@ -1,79 +1,80 @@
 PRODUCTIONS 25
-{conditional_else}             = [['[ELSE]', '[NEWLINE]', '[CURLY_OPEN]', '[NEWLINE]', '{statements}', '[CURLY_CLOSE]'], ['[~]']]
-{conditional}                  = [['[IF]', '[OPEN_BRACKET]', '{term}', '{half_ath}', '[REL_OP]', '{term}', '{half_ath}', '[CLOSE_BRACKET]', '[NEWLINE]', '[CURLY_OPEN]', '[NEWLINE]', '{statements}', '[CURLY_CLOSE]', '{conditional_else}']]
-{exp1}                         = [['[~]'], ['[REL_OP]', '{term}', '{half_ath}', '{exp2}']]
-{exp2}                         = [['[~]'], ['[LOGIC_OP]', '{term}', '{half_ath}', '[REL_OP]', '{term}', '{half_ath}']]
-{expn_left_fac}                = [['[COMMA]', '{expressions}'], ['[~]']]
-{expressions}                  = [['{expression}', '{expn_left_fac}']]
-{expression}                   = [['{term}', '{half_ath}', '{exp1}'], ['[CALL]', '[IDENTIFIER]', '{stmt2}'], ['[LITERAL]']]
-{factor}                       = [['[NUMBER]'], ['[IDENTIFIER]']]
-{fn_call_left_fac}             = [['[CLOSE_BRACKET]'], ['{expressions}', '[CLOSE_BRACKET]']]
-{function_header}              = [['[DATA_TYPE]', '[IDENTIFIER]', '[OPEN_BRACKET]', '{parameter_list}', '[CLOSE_BRACKET]']]
-{functions}                    = [['{function}', '{left_fac_fn}']]
-{function}                     = [['{function_header}', '[NEWLINE]', '{statements}']]
-{half_ath}                     = [['[HIGH_ARITH]', '{term}'], ['[~]']]
-{half_term}                    = [['[LOW_ARITH]', '{factor}'], ['[~]']]
-{iterative}                    = [['[WHILE]', '[OPEN_BRACKET]', '{term}', '{half_ath}', '[REL_OP]', '{term}', '{half_ath}', '[CLOSE_BRACKET]', '[NEWLINE]', '[CURLY_OPEN]', '[NEWLINE]', '{statements}', '[CURLY_CLOSE]']]
-{left_fac_fn}                  = [['{functions}'], ['[~]']]
-{main}                         = [['[MAIN]', '[NEWLINE]', '{statements}']]
-{parameter_list}               = [['[DATA_TYPE]', '[IDENTIFIER]', '{params}']]
-{params}                       = [['[COMMA]', '{parameter_list}'], ['[~]']]
-{program}                      = [['{functions}', '{main}'], ['{main}']]
-{statements}                   = [['[TAB]', '{statement}', '[SEMI_COLON]', '[NEWLINE]', '{statements}'], ['[~]']]
-{statement}                    = [['[RETURN]', '', '{expression}'], ['[DATA_TYPE]', '[IDENTIFIER]', '{stmt1}'], ['[IDENTIFIER]', '{stmt2}'], ['{conditional}'], ['{iterative}'], ['[OP]', '{expression}'], ['[OP_NEWLINE]']]
-{stmt1}                        = [['[ASMT]', '{expression}'], ['[~]']]
-{stmt2}                        = [['[ASMT]', '{expression}'], ['[OPEN_BRACKET]', '{fn_call_left_fac}']]
-{term}                         = [['{factor}', '{half_term}']]
+{ce}                           = [['[E]', '[NL]', '[CO]', '[NL]', '{sts}', '[CC]'], ['[~]']]
+{c}                            = [['[IF]', '[OB]', '{t}', '{ha}', '[RO]', '{t}', '{ha}', '[CB]', '[NL]', '[CO]', '[NL]', '{sts}', '[CC]', '{ce}']]
+{e1}                           = [['[~]'], ['[RO]', '{t}', '{ha}', '{e2}']]
+{e2}                           = [['[~]'], ['[LO]', '{t}', '{ha}', '[RO]', '{t}', '{ha}']]
+{elf}                          = [['[C]', '{ex}'], ['[~]']]
+{ex}                           = [['{e}', '{elf}']]
+{e}                            = [['{t}', '{ha}', '{e1}'], ['[CA]', '[ID]', '{st2}'], ['[L]']]
+{fclf}                         = [['[CB]'], ['{ex}', '[CB]']]
+{fh}                           = [['[DT]', '[ID]', '[OB]', '{pl}', '[CB]']]
+{fn}                           = [['{fh}', '[NL]', '{sts}']]
+{fs}                           = [['{fn}', '{lff}']]
+{f}                            = [['[N]'], ['[ID]']]
+{ha}                           = [['[HA]', '{t}'], ['[~]']]
+{ht}                           = [['[LA]', '{f}'], ['[~]']]
+{it}                           = [['[W]', '[OB]', '{t}', '{ha}', '[RO]', '{t}', '{ha}', '[CB]', '[NL]', '[CO]', '[NL]', '{sts}', '[CC]']]
+{lff}                          = [['{fs}'], ['[~]']]
+{m}                            = [['[M]', '[NL]', '{sts}']]
+{pl}                           = [['[DT]', '[ID]', '{pm}']]
+{pm}                           = [['[C]', '{pl}'], ['[~]']]
+{p}                            = [['{fs}', '{m}'], ['{m}']]
+{st1}                          = [['[AS]', '{e}'], ['[~]']]
+{st2}                          = [['[AS]', '{e}'], ['[OB]', '{fclf}']]
+{sts}                          = [['[T]', '{st}', '[SC]', '[NL]', '{sts}'], ['[~]']]
+{st}                           = [['[R]', '', '{e}'], ['[DT]', '[ID]', '{st1}'], ['[ID]', '{st2}'], ['{c}'], ['{it}'], ['[OP]', '{e}'], ['[ON]']]
+{t}                            = [['{f}', '{ht}']]
 
 NON TERMINALS 25
-{conditional_else}
-{conditional}
-{exp1}
-{exp2}
-{expn_left_fac}
-{expressions}
-{expression}
-{factor}
-{fn_call_left_fac}
-{function_header}
-{functions}
-{function}
-{half_ath}
-{half_term}
-{iterative}
-{left_fac_fn}
-{main}
-{parameter_list}
-{params}
-{program}
-{statements}
-{statement}
-{stmt1}
-{stmt2}
-{term}
+{ce}
+{c}
+{e1}
+{e2}
+{elf}
+{ex}
+{e}
+{fclf}
+{fh}
+{fn}
+{fs}
+{f}
+{ha}
+{ht}
+{it}
+{lff}
+{m}
+{pl}
+{pm}
+{p}
+{st1}
+{st2}
+{sts}
+{st}
+{t}
 
-TERMINALS 24
-[ASMT]
-[CALL]
-[CLOSE_BRACKET]
-[COMMA]
-[CURLY_CLOSE]
-[DATA_TYPE]
-[ELSE]
-[HIGH_ARITH]
-[IDENTIFIER]
+TERMINALS 25
+[AS]
+[CA]
+[CB]
+[CC]
+[CO]
+[C]
+[DT]
+[E]
+[HA]
+[ID]
 [IF]
-[LITERAL]
-[LOGIC_OP]
-[LOW_ARITH]
-[MAIN]
-[NEWLINE]
-[NUMBER]
-[OPEN_BRACKET]
+[LA]
+[LO]
+[L]
+[M]
+[NL]
+[N]
+[OB]
+[ON]
 [OP]
-[OP_NEWLINE]
-[REL_OP]
-[RETURN]
-[SEMI_COLON]
-[TAB]
-[WHILE]
+[RO]
+[R]
+[SC]
+[T]
+[W]

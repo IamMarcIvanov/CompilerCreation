@@ -1,0 +1,26 @@
+25
+{p}	=	[M], [DT] =	$
+{fs}	=	[DT]	= [M]
+{lff}	=	[DT] =	[M]
+{fn}	=	[DT] =	[M], [DT]
+{fh}	=	[DT] =	[NL]
+{pl}	=	[DT] =	[CB]
+{pm}	=	[C] =	[CB]
+{m}	=	[M]	= $
+{sts}	=	[T] =	[M], [DT], [CC], $
+{st}	=	[R], [DT], [ID], [OP], [ON], [IF], [W] =	[SC]
+{st1}	=	[AS]	 = [SC]
+{st2}	=	[AS], [OB] =	[SC], [CB], [C]
+{e}	=	[CA], [L], [N], [ID] =	[SC], [CB], [C]
+{e1}	=	[RO] =	[SC], [CB], [C]
+{e2}	=	[LO] =	[SC], [CB], [C]
+{ha}	=	[HA] =	[SC], [RO], [LO], [CB], [C]
+{t}	=	[N], [ID] =	[SC], [RO], [HA], [LO], [CB], [C]
+{ht}	=	[LA] =	[SC], [RO], [HA], [LO], [CB], [C]
+{f}	=	[N], [ID] =	[SC], [RO], [HA], [LO], [LA], [CB], [C]
+{fclf}	=	[CB], [CA], [L], [N], [ID] =	[SC], [CB], [C]
+{ex}	=	[CA], [L], [N], [ID] =	[CB]
+{elf}	=	[C] =	[CB]
+{it}	=	[W]	 = [SC]
+{c}	=	[IF] =	[SC]
+{ce}	=	[E] =	[SC]

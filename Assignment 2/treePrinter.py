@@ -1,5 +1,4 @@
-print('''Textually visualized tree, with vertically-centered parent nodes''')
- 
+from parserMINE import * 
 from functools import reduce
 from itertools import (chain, takewhile)
  
@@ -155,40 +154,59 @@ def drawTree2(blnCompact):
 def main():
     '''Trees drawn in varying formats'''
  
-
- 
+    pObj = Parser()
+    r = pObj.root
+    
+    def getString(root):
+        if root.data == '':
+            return ""
+        else:
+            s = "Node('" + root.data + "')(["
+            #root.children.reverse()
+            for c in root.children:
+                s += getString(c)
+                #print(c.parent.data, c.data)
+                if c.index < len(root.children) - 1:
+                    s += ","
+            s += "])"
+            # if len(root.children) == 0:
+                # s += "([])"
+            return s
+    
+    treeString = eval(getString(r))
+        
     # tree :: Tree String
     tree2 = Node('Alpha')([
-        Node('Beta')([
-            Node('Epsilon')([]),
-            Node('Zeta')([]),
-            Node('Eta')([]),
-            Node('Theta')([
-                Node('Mu')([
-                    Node('Anirudh')([
-                        Node('Utkarsh')([])
-                        ])
+                Node('Beta')([
+                    Node('Epsilon')([]),
+                    Node('Zeta')([]),
+                    Node('Eta')([]),
+                    Node('Theta')([
+                        Node('Mu')([
+                            Node('Anirudh')([
+                                Node('Utkarsh')([])
+                                ])
+                        ]),
+                        Node('Nu')([]),
+                        Node('Danish')([])
+                    ])
                 ]),
-                Node('Nu')([]),
-                Node('Danish')([])
+                Node('Gamma')([
+                    Node('Xi')([Node('Omicron')([])])
+                ]),
+                Node('Delta')([
+                    Node('Iota')([]),
+                    Node('Kappa')([]),
+                    Node('Lambda')([])
+                ])
             ])
-        ]),
-        Node('Gamma')([
-            Node('Xi')([Node('Omicron')([])])
-        ]),
-        Node('Delta')([
-            Node('Iota')([]),
-            Node('Kappa')([]),
-            Node('Lambda')([])
-        ])
-    ])
  
     print(
         '\n\n'.join([
             #'Fully compacted (parents not all centered):',
             #drawTree2(True)(False)(tree1),
             #'Expanded with vertically centered parents:',
-            drawTree2(False)(False)(tree2)
+            drawTree2(False)(False)(treeString)
             #'Centered parents with nodeless lines pruned out:',
             #drawTree2(False)(True)(tree2)
         ])
