@@ -1,6 +1,4 @@
-from Neuspeak_Lexer import *
 from first_follow_getters import *
-
 
 read_cfg = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG.txt'
 write_productions = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\prod.txt'
@@ -23,8 +21,8 @@ class Parser:
         self.root = ParseTree()
         #self.lex = Lexer() # lex object has a member self.lex.tokenStream is list of tokens
         #self.tokenStream = self.lex.tokenStream
+        
         self.tokenStream = ts.split()
-        print(self.tokenStream)
         self.fftObj = FirstFollowTable()
         self.start_nt = self.fftObj.start_nt
         self.stack = ['$', self.start_nt]
@@ -40,11 +38,13 @@ class Parser:
         while len(self.stack) > 0 and count < 100:
             if self.stack[-1].startswith('{'): # means non-terminal
                 row = self.NT.index(self.stack.pop()) + 1
-                col = self.T.index(self.tokenStream[curr]) + 1
+                col = self.table[0].index(self.tokenStream[curr])
                 self.stack.extend(self.table[row][col].split('=')[1].strip().split(' ')[::-1]) # get RHS of rule
             elif self.stack[-1].startswith('['): # means terminal
                 if self.stack[-1] == self.tokenStream[curr]:
                     curr += 1
+                    self.stack.pop()
+                elif self.stack[-1] == '[~]':
                     self.stack.pop()
                 else:
                     print('Fallen heros')
@@ -53,6 +53,8 @@ class Parser:
                     self.stack.pop()
                     curr += 1
             count += 1
-            #print('stack', self.stack)
+            print('stack', self.stack)
+
+
 obj = Parser()   
                     

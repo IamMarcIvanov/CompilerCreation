@@ -49,10 +49,10 @@ class FirstFollowTable:
     def getProductions(self):
         with open(prodLoc, 'r') as f:
             n = int(f.readline())
-            for _ in range(n):
+            for i in range(n):
                 line = f.readline().split('::=')
                 nt = line[0].strip()
-                if n == 0:
+                if i == 0:
                     self.start_nt = nt
                 self.productions[nt] = self.productions.get(nt, [])
                 self.productions[nt].append(line[1].strip().split(' '))
@@ -151,4 +151,4 @@ class FirstFollowTable:
             for key in sorted(self.FOLLOW.keys()):
                 f.write('{:<30} = {}\n'.format(key, sorted(self.FOLLOW[key])))
 
-obj = FirstFollowTable()
+#obj = FirstFollowTable()
