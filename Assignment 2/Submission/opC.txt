@@ -4,25 +4,151 @@
              TAB                          (tab)                           2               
           DATA_TYPE                        int                            2               
           IDENTIFIER                        y                             2               
+          SEMI_COLON                        ;                             2               
            NEWLINE                       newline                          2               
              TAB                          (tab)                           3               
           DATA_TYPE                        int                            3               
           IDENTIFIER                        x                             3               
           SEMI_COLON                        ;                             3               
-          SEMI_COLON                        ;                             3               
+           NEWLINE                       newline                          3               
+             TAB                          (tab)                           4               
+              IF                            if                            4               
+         OPEN_BRACKET                       (                             4               
+          IDENTIFIER                        a                             4               
+            REL_OP                          >=                            4               
+            NUMBER                          3                             4               
+           LOGIC_OP                         &&                            4               
+          IDENTIFIER                        b                             4               
+            REL_OP                          <                             4               
+            NUMBER                          10                            4               
+           LOGIC_OP                         &&                            4               
+        CLOSE_BRACKET                       )                             4               
+           NEWLINE                       newline                          4               
+          CURLY_OPEN                        (                             5               
+           NEWLINE                       newline                          5               
+             TAB                          (tab)                           6               
+              IF                            if                            6               
+         OPEN_BRACKET                       (                             6               
+          IDENTIFIER                        a                             6               
+            REL_OP                          ==                            6               
+            NUMBER                          3                             6               
+           LOGIC_OP                         ||                            6               
+          IDENTIFIER                        a                             6               
+          LOW_ARITH                         +                             6               
+          IDENTIFIER                        c                             6               
+            REL_OP                          <=                            6               
+            NUMBER                          9                             6               
+        CLOSE_BRACKET                       )                             6               
+           NEWLINE                       newline                          6               
+          CURLY_OPEN                        (                             7               
+           NEWLINE                       newline                          7               
+             TAB                          (tab)                           8               
+          DATA_TYPE                       string                          8               
+          IDENTIFIER                       sum                            8               
+             ASMT                           =                             8               
+          IDENTIFIER                        a                             8               
+          LOW_ARITH                         +                             8               
+          IDENTIFIER                        x                             8               
+          SEMI_COLON                        ;                             8               
+           NEWLINE                       newline                          8               
+         CURLY_CLOSE                        )                             9               
+             ELSE                          else                           9               
+           NEWLINE                       newline                          9               
+          CURLY_OPEN                        (                             10              
+           NEWLINE                       newline                          10              
+             TAB                          (tab)                           11              
+            OUTPUT                        output                          11              
+          IDENTIFIER                        c                             11              
+          LOW_ARITH                         +                             11              
+          IDENTIFIER                        b                             11              
+          HIGH_ARITH                        *                             11              
+          IDENTIFIER                       goat                           11              
+          LOW_ARITH                         +                             11              
+          IDENTIFIER                        g                             11              
+          SEMI_COLON                        ;                             11              
+           NEWLINE                       newline                          11              
+         CURLY_CLOSE                        )                             12              
+          SEMI_COLON                        ;                             12              
+           NEWLINE                       newline                          12              
+         CURLY_CLOSE                        )                             13              
+          SEMI_COLON                        ;                             13              
+           NEWLINE                       newline                          13              
 
 
 
 TOKEN STREAM
-[M]
-[NL]
-[T]
-[DT]
-[ID]
-[NL]
-[T]
-[DT]
-[ID]
-[SC]
-[SC]
-$
+[M]	1
+[NL]	1
+[T]	2
+[DT]	2
+[ID]	2
+[SC]	2
+[NL]	2
+[T]	3
+[DT]	3
+[ID]	3
+[SC]	3
+[NL]	3
+[T]	4
+[IF]	4
+[OB]	4
+[ID]	4
+[RO]	4
+[N]	4
+[LO]	4
+[ID]	4
+[RO]	4
+[N]	4
+[LO]	4
+[CB]	4
+[NL]	4
+[CO]	5
+[NL]	5
+[T]	6
+[IF]	6
+[OB]	6
+[ID]	6
+[RO]	6
+[N]	6
+[LO]	6
+[ID]	6
+[LA]	6
+[ID]	6
+[RO]	6
+[N]	6
+[CB]	6
+[NL]	6
+[CO]	7
+[NL]	7
+[T]	8
+[DT]	8
+[ID]	8
+[AS]	8
+[ID]	8
+[LA]	8
+[ID]	8
+[SC]	8
+[NL]	8
+[CC]	9
+[E]	9
+[NL]	9
+[CO]	10
+[NL]	10
+[T]	11
+[OP]	11
+[ID]	11
+[LA]	11
+[ID]	11
+[HA]	11
+[ID]	11
+[LA]	11
+[ID]	11
+[SC]	11
+[NL]	11
+[CC]	12
+[SC]	12
+[NL]	12
+[CC]	13
+[SC]	13
+[NL]	13
+$	100

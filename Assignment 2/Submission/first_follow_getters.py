@@ -1,12 +1,32 @@
-FFTloc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\first_follow_table2.txt'
-prodLoc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\CFG_scratch2.txt'
-write_table_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\table.txt'
-write_first_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\first.txt'
-write_follow_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\follow.txt'
-write_prod_loc = r'D:\Mimisbrunnr\Github Repositories\CompilerCreation\Assignment 2\prod.txt'
+
 
 class FirstFollowTable:
-    def __init__(self):
+    def __init__(self, 
+                 FFTloc, 
+                 prodLoc, 
+                 write_table_loc, 
+                 write_first_loc, 
+                 write_follow_loc, 
+                 write_prod_loc):
+        """
+        Summary:
+            Here we read a hand-crafted first and follow table. And use that to create the parsing table.
+
+        Args:
+            FFTloc ([str]): [The path to the file where the first follow table exists]
+            prodLoc ([str]): [The path to the file from with the CFG for Neuspeak is kept]
+            write_table_loc ([str]): [The path to the file where the action table for the current file is written]
+            write_first_loc ([str]): [The path to the file where the first set is written]
+            write_follow_loc ([str]): [The path to the file where the follow set is written]
+            write_prod_loc ([str]): [The path to the file where the list of terminals, non-terminals and productions are written]
+        """
+        self.FFTloc = FFTloc
+        self.prodLoc = prodLoc
+        self.write_first_loc = write_first_loc
+        self.write_follow_loc = write_follow_loc
+        self.write_table_loc = write_table_loc
+        self.write_prod_loc = write_prod_loc
+        
         self.table = [[]]
         self.T = set()
         self.NT = set()
@@ -26,7 +46,7 @@ class FirstFollowTable:
         self.writeTable()
     
     def getTNT(self):
-        with open(FFTloc, 'r') as f:
+        with open(self.FFTloc, 'r') as f:
             n = int(f.readline())
             for _ in range(n):
                 line = f.readline().split('=')
@@ -47,7 +67,7 @@ class FirstFollowTable:
         self.FIRST['[~]'] = ['[~]']
 
     def getProductions(self):
-        with open(prodLoc, 'r') as f:
+        with open(self.prodLoc, 'r') as f:
             n = int(f.readline())
             for i in range(n):
                 line = f.readline().split('::=')
@@ -78,12 +98,6 @@ class FirstFollowTable:
                             col_n = self.table[0].index(t)
                             if not self.table[row_n][col_n]:
                                 self.table[row_n][col_n] = nt + ' = ' + ' '.join(rhs)
-                    # else:
-                        # for t in self.FOLLOW[nt]:
-                            # row_n = row + 1
-                            # col_n = self.table[0].index(t)
-                            # if not self.table[row_n][col_n]:
-                                # self.table[row_n][col_n] = nt + ' = ' + ' '.join(rhs)
                 else:
                     if rhs[0] != '[~]':
                         row_n = row + 1
@@ -120,7 +134,7 @@ class FirstFollowTable:
             
         
     def writeProductions(self):
-        with open(write_prod_loc, 'w') as f:
+        with open(self.write_prod_loc, 'w') as f:
             f.write('PRODUCTIONS ' + str(len(self.productions.keys())) + '\n')
             for key in sorted(self.productions.keys()):
                 f.write('{:<30} = {}\n'.format(key, self.productions[key]))
@@ -132,7 +146,7 @@ class FirstFollowTable:
                 f.write(t + '\n')
      
     def writeTable(self):
-        with open(write_table_loc, 'w') as f:
+        with open(self.write_table_loc, 'w') as f:
             for row_n, row in enumerate(self.table):
                 for col_n, cell in enumerate(row):
                     s = '{:^' + str(self.col_max_widths[col_n]) + '} | '
@@ -143,15 +157,13 @@ class FirstFollowTable:
                     f.write('\n')
                         
     def writeFirst(self):
-        with open(write_first_loc, 'w') as f:
+        with open(self.write_first_loc, 'w') as f:
             f.write(str(len(self.FIRST.keys())) + '\n')
             for key in sorted(self.FIRST.keys()):
                 f.write('{:<30} = {}\n'.format(key, sorted(self.FIRST[key])))
     
     def writeFollow(self):
-        with open(write_follow_loc, 'w') as f:
+        with open(self.write_follow_loc, 'w') as f:
             f.write(str(len(self.FOLLOW.keys())) + '\n')
             for key in sorted(self.FOLLOW.keys()):
                 f.write('{:<30} = {}\n'.format(key, sorted(self.FOLLOW[key])))
-
-#obj = FirstFollowTable()

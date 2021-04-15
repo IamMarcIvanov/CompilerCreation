@@ -1,0 +1,16 @@
+int checkmax(int a , int b )
+	if ( a > b )
+{
+	return a ;
+} ;
+	return b ;
+main()
+	int b = 12 ;
+	int a = 17 ;
+	int sum = 0 ;
+	string g = @checkmax( a , b ) ;
+	while( a + b > c * d + e )
+{
+	sum =  sum + b ;
+	a = a - 1 ;
+} ;

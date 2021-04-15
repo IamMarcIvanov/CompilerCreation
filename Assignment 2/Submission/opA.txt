@@ -73,74 +73,74 @@
 
 
 TOKEN STREAM
-[DT]
-[ID]
-[OB]
-[DT]
-[ID]
-[C]
-[DT]
-[ID]
-[CB]
-[NL]
-[T]
-[ID]
-[AS]
-[N]
-[SC]
-[SC]
-[NL]
-[M]
-[NL]
-[T]
-[DT]
-[ID]
-[SC]
-[NL]
-[T]
-[ID]
-[AS]
-[N]
-[SC]
-[NL]
-[T]
-[W]
-[OB]
-[ID]
-[RO]
-[N]
-[CB]
-[NL]
-[CO]
-[NL]
-[T]
-[ID]
-[AS]
-[ID]
-[LA]
-[N]
-[SC]
-[NL]
-[CC]
-[SC]
-[NL]
-[T]
-[IF]
-[OB]
-[ID]
-[RO]
-[ID]
-[CB]
-[NL]
-[CO]
-[NL]
-[T]
-[ID]
-[AS]
-[N]
-[SC]
-[NL]
-[CC]
-[SC]
-[NL]
-$
+[DT]	1
+[ID]	1
+[OB]	1
+[DT]	1
+[ID]	1
+[C]	1
+[DT]	1
+[ID]	1
+[CB]	1
+[NL]	1
+[T]	2
+[ID]	2
+[AS]	2
+[N]	2
+[SC]	2
+[SC]	2
+[NL]	2
+[M]	3
+[NL]	3
+[T]	4
+[DT]	4
+[ID]	4
+[SC]	4
+[NL]	4
+[T]	5
+[ID]	5
+[AS]	5
+[N]	5
+[SC]	5
+[NL]	5
+[T]	6
+[W]	6
+[OB]	6
+[ID]	6
+[RO]	6
+[N]	6
+[CB]	6
+[NL]	6
+[CO]	7
+[NL]	7
+[T]	8
+[ID]	8
+[AS]	8
+[ID]	8
+[LA]	8
+[N]	8
+[SC]	8
+[NL]	8
+[CC]	9
+[SC]	9
+[NL]	9
+[T]	10
+[IF]	10
+[OB]	10
+[ID]	10
+[RO]	10
+[ID]	10
+[CB]	10
+[NL]	10
+[CO]	11
+[NL]	11
+[T]	12
+[ID]	12
+[AS]	12
+[N]	12
+[SC]	12
+[NL]	12
+[CC]	13
+[SC]	13
+[NL]	13
+$	100

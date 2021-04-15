@@ -2,15 +2,111 @@
              MAIN                         main()                          1               
            NEWLINE                       newline                          1               
              TAB                          (tab)                           2               
-          DATA_TYPE                        int                            2               
+          DATA_TYPE                       string                          2               
+          IDENTIFIER                        s                             2               
+             ASMT                           =                             2               
+           LITERAL                "Hell is going away_"                   2               
+          SEMI_COLON                        ;                             2               
            NEWLINE                       newline                          2               
+             TAB                          (tab)                           3               
+          DATA_TYPE                        int                            3               
+          IDENTIFIER                        y                             3               
+           NEWLINE                       newline                          3               
+             TAB                          (tab)                           4               
+          DATA_TYPE                       float                           4               
+          IDENTIFIER                        b                             4               
+             ASMT                           =                             4               
+            NUMBER                         3.72                           4               
+          SEMI_COLON                        ;                             4               
+           NEWLINE                       newline                          4               
+             TAB                          (tab)                           5               
+          DATA_TYPE                        char                           5               
+          IDENTIFIER                        c                             5               
+             ASMT                           =                             5               
+           LITERAL                         'd'                            5               
+          SEMI_COLON                        ;                             5               
+           NEWLINE                       newline                          5               
+             TAB                          (tab)                           6               
+          DATA_TYPE                        int                            6               
+          IDENTIFIER                        x                             6               
+          SEMI_COLON                        ;                             6               
+           NEWLINE                       newline                          6               
+             TAB                          (tab)                           7               
+          IDENTIFIER                        x                             7               
+             ASMT                           =                             7               
+            NUMBER                          1                             7               
+          SEMI_COLON                        ;                             7               
+           NEWLINE                       newline                          7               
+             TAB                          (tab)                           8               
+          IDENTIFIER                        y                             8               
+             ASMT                           =                             8               
+            NUMBER                          2                             8               
+          SEMI_COLON                        ;                             8               
+           NEWLINE                       newline                          8               
+             TAB                          (tab)                           9               
+            OUTPUT                        output                          9               
+          IDENTIFIER                        x                             9               
+          SEMI_COLON                        ;                             9               
+           NEWLINE                       newline                          9               
+             TAB                          (tab)                           10              
+        OUTPUT NEWLINE                  newline()                         10              
+          SEMI_COLON                        ;                             10              
+           NEWLINE                       newline                          10              
 
 
 
 TOKEN STREAM
-[M]
-[NL]
-[T]
-[DT]
-[NL]
-$
+[M]	1
+[NL]	1
+[T]	2
+[DT]	2
+[ID]	2
+[AS]	2
+[L]	2
+[SC]	2
+[NL]	2
+[T]	3
+[DT]	3
+[ID]	3
+[NL]	3
+[T]	4
+[DT]	4
+[ID]	4
+[AS]	4
+[N]	4
+[SC]	4
+[NL]	4
+[T]	5
+[DT]	5
+[ID]	5
+[AS]	5
+[L]	5
+[SC]	5
+[NL]	5
+[T]	6
+[DT]	6
+[ID]	6
+[SC]	6
+[NL]	6
+[T]	7
+[ID]	7
+[AS]	7
+[N]	7
+[SC]	7
+[NL]	7
+[T]	8
+[ID]	8
+[AS]	8
+[N]	8
+[SC]	8
+[NL]	8
+[T]	9
+[OP]	9
+[ID]	9
+[SC]	9
+[NL]	9
+[T]	10
+[ON]	10
+[SC]	10
+[NL]	10
+$	100

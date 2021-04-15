@@ -1,2 +1,11 @@
+# these are comments
 main()
-	int y
+	string s = "Hell is going away_" ;
+	int y 
+	float b = 3.72 ;
+	char c = 'd' ;
+	int x;
+	x = 1 ;
+	y = 2 ;
+	output x ;
+	newline() ;
